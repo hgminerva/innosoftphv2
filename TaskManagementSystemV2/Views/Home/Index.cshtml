@@ -1,0 +1,738 @@
+﻿@{
+    ViewBag.Title = "Making IT Simpler.";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @Styles.Render("~/Content/main.css")
+    @Styles.Render("~/Content/preset1.css")
+</head><!--/head-->
+<body id="top">
+    <!--.preloader-->
+    <div class="preloader"></div>
+    <!--/.preloader-->
+    <header id="home">
+       @Html.Partial("HomeHeader")
+        <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <a data-scroll href="#POS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IPOSdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/POSbrand2.png" alt=""></div>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Point-Of-Sale (POS) System</strong> is a 3-in-1 software that caters to micro, small and medium sized businesses (MSMB)<br /><br />
+                                    Its module includes Sales, Accounts Receivable and Inventory. It is designed to be light and simplified to make users easily adapt and understand the flow of operations yet powerful enough to gather vital information for making business decisions.<br /><br />
+                                    By using <strong>POS</strong>, you can check your inventory in real-time and any given period. Sales and Collection Summaries can be generated instantly and accurately. With these reports you will be able to control the operations of your business, minimize inventory pilferage, and monitor you cash.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#FMIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/FMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/FMISbrand2.png" alt=""></div>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Financial Management Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br /><br />
+                                    <strong>FMIS</strong> is a strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
+                                    With <strong>FMIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#EasyFIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/WebFMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/easyfislogo2.png" alt=""></div>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Easy Financial Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br /><br />
+                                    <strong>EasyFIS</strong> is an online strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
+                                    With <strong>EasyFIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#HRIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IHRISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/HRISbrand2.png" alt=""></div>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Human Resource Information System</strong> is a comprehensive system for managing Employee Records from Attendance and Time Keeping to Payroll. Designed for large employee based pool with multiple and geographically separated branches.<br /><br />
+                                    Designed to save-time for your payroll clerks and staff in generating payroll for large number of employees. It will also guide your staff to accurately pinpoint employee records like Lates and Absences, Leaves, Loans, Earnings and Other Deduction Compositions.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+
+        </div><!--/#home-slider-->
+    </header><!--/#home-->
+    <section id="services">
+        <div class="container">
+            <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+                <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                        <h2><span class="fa fa-wrench"></span> Our Services</h2>
+                        <p>Aside from the existing products we also provide software development services to our clients if the need arises. Software development service provides the client the ability to create its own unique software or extends its current system through integration and customization.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="our-services">
+                <div class="row">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <center>
+                            <div class="service-icon">
+                                <i class="fa fa-refresh"></i>
+                            </div>
+                        </center>
+                        <div class="service-info">
+                            <center><h3>Software Development Life-cycle</h3></center>
+                            <p>
+                                <ul class="ulservices">
+                                    <li>Scope / Requirement Specification</li>
+                                    <li>Development / Customization</li>
+                                    <li>Master Data Loading</li>
+                                    <li>Installation</li>
+                                    <li>User Testing and Training</li>
+                                    <li>Acceptance</li>
+                                    <li>Go Live</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <center>
+                            <div class="service-icon">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                        </center>
+                        <div class="service-info">
+                            <center>
+                                <h3>Technology</h3>
+                                <a href="https://angular.io/" target="_blank"><img class="techpic1 hoveropa" src="~/images/others/angularjs.png" class="img-responsive" alt=""></a>
+                                <a href="http://www.asp.net/" target="_blank"><img class="techpic hoveropa" src="~/images/others/aspnet.png" class="img-responsive" alt=""></a>
+                                <a href="https://azure.microsoft.com/en-us/" target="_blank"><img class="techpic1 hoveropa" src="~/images/others/msazure.png" class="img-responsive" alt=""></a>
+                                <a href="https://www.office.com/" target="_blank"><img class="techpic hoveropa" src="~/images/others/msoffice.png" class="img-responsive" alt=""></a>
+                                <a href="https://www.microsoft.com/en-us/server-cloud/products/sql-server/" target="_blank"><img class="techpic1 hoveropa" src="~/images/others/mssql.png" class="img-responsive" alt=""></a>
+                                <a href="https://nodejs.org/en/" target="_blank"><img class="techpic hoveropa" src="~/images/others/nodejs.png" class="img-responsive" alt=""></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i id="anchorabout-us"></i>
+    </section><!--/#services-->
+    <section id="about-us" class="parallax">
+        <div class="container">
+            <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+                <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                        <h2><span class="fa fa-user"></span> About Us</h2>
+                        <p>Know more about us!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                        <p><strong>Innosoft Solutions Services Inc.</strong> is a software company that focuses on development and delivering business software such as Point-Of-Sales Systems (POS), Financial Management Information Systems (FMIS) and Human Resource Information System (HRIS) to Micro, Small and Medium Business Enterprises (MSMBE) within the Philippine Archipelago.</p>
+                        <p>The Company was founded on April 24, 2008 by three friends namely Mr. Jason Yap, Engr. Harold Glenn Minerva and Mr. Jerico Canete. Mr. Yap was into computer hardware distribution and retailing while the other partners where focused into the software development.</p>
+                        <p>Innosoft Solutions served more than three hundred (300) customers from various industries including trading, wholesale/retail, hospitality, healthcare, academic, government, logistics, manufacturing and non-government service organization.</p>
+                        <p>It is currently a member of the PSIA (Philippine Software Industry Association).</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <center>
+                            <a href="http://psia.org.ph/" target="_blank"><img class="aboutpic1 hoveropa" src="~/images/others/PSIA.png" class="img-responsive" alt=""></a>
+                            <a href="http://www.chamber-commerce.net/dir/3348/Cebu-Chamber-of-Commerce-and-Industry-in-Cebu-City" target="_blank"><img class="aboutpic2 hoveropa" src="~/images/others/CCCI.png" class="img-responsive" alt=""></a>
+                        </center>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                        <h2><span class="fa fa-users"></span> Who we are</h2>
+                        <p><strong>Cebu Innosoft Solutions Services Inc.</strong> is the leading local support solutions provider of Information Technology (IT) Services to commercial and government IT Projects within Visayas and Mindanao Areas in the Philippine Archipelago.</p>
+                        <p>Our target industries varies widely from wholesale and retail trading businesses, manufacturing and production, hotel and hospitality, healthcare, academic institutions, logistics, government / non-government organizations and service organizations.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <h2><span class="fa fa-flask"></span> What we do</h2>
+                        <p>We give your company the leverage by providing innovative software solutions products such as <strong>POS</strong>, <strong>FMIS</strong>, <strong>HRIS</strong>, and many more. Your company will gain competitive advantage by using this software as a tool to improve your company's performance. Our commitment is for our client's advancement.</p>
+                        <p>We are focused on building long-term relationship and to provide the right technology expertise. We believe that we must not just push boxes of software and hardware but rather, we concentrate on providing meaningful functionality so as our customers' company enhances its field of expertise in the industry.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                        <h2><span class="fa fa-flag"></span> Our Mission</h2>
+                        <p>
+                            &bull; We shall Develop Software that are user friendly and achieve fast development cycle<br />
+                            &bull; We shall continue to manage the organization by implementing operational and quality programs<br />
+                            &bull; We shall endeavor to upgrade the knowledge of personnel through trainings using the E-XCHANGE of Learning<br />
+                            &bull; We shall adapt to technological change fast and tap product sales distribution model
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <h2><span class="fa fa-eye"></span> Our Vision</h2>
+                        <p><strong>INNOSOFT</strong>, will be the most desired (admired) brand for business solution provider in the Philippines by developing affordable and innovative softwares using highly technical and well trained talents ultimately increasing sales revenues and expanding to international market.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#about-us-->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+                    <h2><span class="fa fa-desktop"></span> Our Products</h2>
+                    <p><strong>Innosoft Solutions</strong> has four growing products: The <strong>POS</strong>, <strong>FMIS</strong>, <strong>EasyFIS</strong>, and <strong>HRIS</strong>.</p>
+                </div>
+                <span id="POS"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <img class="brandpic" src="~/images/products/POSbrand.png" alt="">
+                        <img class="prodpic" src="~/images/products/IPOSdesk.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <p><strong>Point-Of-Sale (POS) System</strong> is a 3-in-1 software that caters to micro, small and medium sized businesses (MSMB)</p>
+                        <p>Its module includes Sales, Accounts Receivable and Inventory. It is designed to be light and simplified to make users easily adapt and understand the flow of operations yet powerful enough to gather vital information for making business decisions.</p>
+                        <p>By using <strong>POS</strong>, you can check your inventory in real-time and any given period. Sales and Collection Summaries can be generated instantly and accurately. With these reports you will be able to control the operations of your business, minimize inventory pilferage, and monitor you cash.</p>
+                        <h3>Features:</h3>
+                        <ul class="ulprod">
+                            <li>Unlimited and flexible pay types e.g., Cash and Credit Cards, Gift Certificate, etc.</li>
+                            <li>Teller Interface for stores such as groceries and pharmacy.</li>
+                            <li>Restaurant Interface for food and beverage businesses.</li>
+                            <li>Table Management allows adding, deleting and grouping of tables.</li>
+                            <li>Cashiering and Tendering Interface for actual receipt of payment with printout of an Official Receipt accredited by the BIR.</li>
+                            <li>Simplified Purchase Order</li>
+                            <li>Stock In / Out Forms that records movement of Inventory.</li>
+                            <li>Disbursement, Remittance / Cash Breakdown Feature</li>
+                            <li>Debit Memo and Credit Memo allow adjustments on Accounts Receivable.</li>
+                            <li>Real-time Reports on Sales, Collection, Accounts Receivables, Inventory, Disbursements and Basic Accounting with Export to Excel / CSV text files feature.</li>
+                        </ul>
+                        <span id="FMIS"></span>
+                    </div>
+                    <hr class="about-info wow fadeInUp" />
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <img class="brandpic" src="~/images/products/FMISbrand.png" alt="">
+                        <img class="prodpic" src="~/images/products/FMISdesk.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <p><strong>Financial Management Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.</p>
+                        <p><strong>FMIS</strong> is a strategic tool that can leverage an organization in making its operations transparent and efficient.</p>
+                        <p>With <strong>FMIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.</p>
+                        <h3>Features:</h3>
+                        <ul class="ulprod">
+                            <li>Comprehensive Aging on AP/AR. Allows the users to monitor and manage payables and receivables with ease.</li>
+                            <li>Multiple Warehouse Inventory Management. Allows you to transfer stocks from one warehouse to another with unlimited warehouse capabilities.</li>
+                            <li>Multiple Units of Measures with Unit Conversions. The user will have an ability to purchase an item using a unit that is different from the base inventory unit.</li>
+                            <li>Real-time Financial Statements with subsidiary ledgers. On the fly, the user can print and view Financial Statements with drill down to transactions.</li>
+                            <li>Simplified Bank Reconciliation. Automated booked cash value versus bank balances.</li>
+                            <li>Item Components feature can be used in monitoring items that needs to be assembled before it can be sold.</li>
+                        </ul>
+                        <span id="EasyFIS"></span>
+                    </div>
+                    <hr class="about-info wow fadeInUp" />
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <img class="brandpic" src="~/images/products/easyfislogo.png" alt="">
+                        <img class="prodpic" src="~/images/products/WebFMISdesk.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <p><strong>Easy Financial Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.</p>
+                        <p><strong>EasyFIS</strong> is an online strategic tool that can leverage an organization in making its operations transparent and efficient.</p>
+                        <p>With <strong>EasyFIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.</p>
+                        <h3>Features:</h3>
+                        <ul class="ulprod">
+                            <li>Comprehensive Aging on AP/AR. Allows the users to monitor and manage payables and receivables with ease.</li>
+                            <li>Multiple Warehouse Inventory Management. Allows you to transfer stocks from one warehouse to another with unlimited warehouse capabilities.</li>
+                            <li>Multiple Units of Measures with Unit Conversions. The user will have an ability to purchase an item using a unit that is different from the base inventory unit.</li>
+                            <li>Real-time Financial Statements with subsidiary ledgers. On the fly, the user can print and view Financial Statements with drill down to transactions.</li>
+                            <li>Simplified Bank Reconciliation. Automated booked cash value versus bank balances.</li>
+                            <li>Item Components feature can be used in monitoring items that needs to be assembled before it can be sold.</li>
+                        </ul>
+                        <span id="HRIS"></span>
+                    </div>
+                    <hr class="about-info wow fadeInUp" />
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <img class="brandpic" src="~/images/products/HRISbrand.png" alt="">
+                        <img class="prodpic" src="~/images/products/IHRISdesk.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about-info wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <p><strong>Human Resource Information System</strong> is a comprehensive system for managing Employee Records from Attendance and Time Keeping to Payroll. Designed for large employee based pool with multiple and geographically separated branches.</p>
+                        <p>Designed to save-time for your payroll clerks and staff in generating payroll for large number of employees. It will also guide your staff to accurately pinpoint employee records like Lates and Absences, Leaves, Loans, Earnings and Other Deduction Compositions.</p>
+                        <h3>Features:</h3>
+                        <ul class="ulprod">
+                            <li>Auto-calculate hours worked of employees and links with a Time Record Machines (Biometrics, Cards, IDs, etc.).</li>
+                            <li>Computes Fixed (Monthly, Semimonthly, Weekly, Daily) or Flex Employees</li>
+                            <li>Automatic deduction based on legal requirements (SSS, GSIS, Philhealth, HDMF, Withholding Tax).</li>
+                            <li>Generates Pay Slip and Payroll Worksheet in Real-time.</li>
+                            <li>Generates Management and Analysis Reports (Attendance Monitoring and Demographics).</li>
+                            <li>Generates EDI files for external entities (Banks for ATM, SSS, Philhealth, HDMF and BIR).</li>
+                            <li>Monitors Loans with Ledger. The system will automatically credit payments from the payroll to the ledger so that the loan balances are updated.</li>
+                            <li>Monitors Leaves with Balances. The systems can monitor sick and vacation leaves based on leave application and employee time records.</li>
+                            <li>Leave Management</li>
+                            <li>Employee Exit Management</li>
+                        </ul>
+                        <i id="menuClients"></i>
+                    </div>
+                    <hr class="about-info wow fadeInUp lasthr" />
+                </div>
+                <div class="container clients-caro">
+                    <div class="row">
+                        <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+                            <h2><span class="fa fa-user"></span> Our Clients</h2>
+                            <p>Over 500 clients and growing.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                            <div class="grid grid-pad">
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://theabacagroup.com/" target="_blank"><img src="~/images/clients/abaca.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/arbees.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://cebuatlantichardware.com/wp/" target="_blank"><img src="~/images/clients/atlantic.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.bianospizza.com/" target="_blank"><img src="~/images/clients/bianos.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/bigtoms.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/cafenamoo.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.caldapizzacebu.com/" target="_blank"><img src="~/images/clients/caldapizza.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.casaverdecebu.com/" target="_blank"><img src="~/images/clients/casaverde.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.castlepeakhotel.net/" target="_blank"><img src="~/images/clients/castlepeak.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/CEC.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://cnu.edu.ph/" target="_blank"><img src="~/images/clients/CNU.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.crunchicken.com/" target="_blank"><img src="~/images/clients/crunchicken.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/Davinci.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.dranix.com.ph/" target="_blank"><img src="~/images/clients/dranix.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://estacabaygarden.com/" target="_blank"><img src="~/images/clients/estacabay.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.figarocoffee.com/" target="_blank"><img src="~/images/clients/figaro.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/flameit.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/gaisano.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/goldencowrie.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.thegrandesuites.com/" target="_blank"><img src="~/images/clients/grandesuite.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://gtcosmetics.com.ph/" target="_blank"><img src="~/images/clients/GT.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://haroldsmansion.com/" target="_blank"><img src="~/images/clients/harolds.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://ipi-phil.com/" target="_blank"><img src="~/images/clients/IPI.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.juliesbakeshop.com.ph/" target="_blank"><img src="~/images/clients/julies.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.kingsfoods.com.ph/" target="_blank"><img src="~/images/clients/Kings.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://malapascualegend.com/" target="_blank"><img src="~/images/clients/malapascualegend.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://mactancebuairport.com/" target="_blank"><img src="~/images/clients/mcia.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.mcwd.gov.ph/" target="_blank"><img src="~/images/clients/mcwd.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://mfcomputersolution.com/" target="_blank"><img src="~/images/clients/mfcomputers.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/mooncafe.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/nutech.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://olympus.com.ph/" target="_blank"><img src="~/images/clients/olympus.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.orangebrutus.com/" target="_blank"><img src="~/images/clients/OrangeBrutus.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://papakitsmarina.com/" target="_blank"><img src="~/images/clients/papakits.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.philhealth.gov.ph/" target="_blank"><img src="~/images/clients/philhealth.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.regalbusinessparkhotel.com/" target="_blank"><img src="~/images/clients/regal.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.sanmiguel.com.ph/" target="_blank"><img src="~/images/clients/sanmig.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/seacrest.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.seaoil.com.ph/" target="_blank"><img src="~/images/clients/seaoil.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://shamrockotap.com/" target="_blank"><img src="~/images/clients/shamrocki.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.skygo.com.ph/" target="_blank"><img src="~/images/clients/skygo.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.spcfi.edu.ph/" target="_blank"><img src="~/images/clients/spcfi.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/spicefusion.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/subzero.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://sunpride.net/" target="_blank"><img src="~/images/clients/sunpride.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <img src="~/images/clients/threesixty.png" class="img-responsive" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.toyota.com.ph/" target="_blank"><img src="~/images/clients/toyota.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://universityofbohol.edu.ph/" target="_blank"><img src="~/images/clients/UB.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://vsmmc.doh.gov.ph/" target="_blank"><img src="~/images/clients/vsmmci.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://wellnessland-ph.com/" target="_blank"><img src="~/images/clients/wellnessland.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-1-8">
+                                    <div class="module">
+                                        <a href="http://www.yakskibarbecue.com/" target="_blank"><img src="~/images/clients/yakski.png" class="img-responsive" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i id="menuTest"></i>
+    </section><!--/#portfolio-->
+
+    <section id="twitter" class="parallax">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div id="twitter-carousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                    <p><i>"Innosoft is one of the few companies that are hard to find, great quality service at an affordable price.<br />We truly enjoy working with Innosoft, they didn't abandoned the project despite of many challenges they faced. We will continue to patronage Innosoft's service as we continue our business, we will also recommend them to other companies as well.<br /> Innosoft is not just a provider but a partner in making business grow."</i></p>
+                                    <p><strong>Lito Castaneda</strong>, Head of MIS Nationwide - Sea Olympus Marketing Inc.</p>
+                                </div>
+                                <div class="item">
+                                    <p><i><br />"Innosoft Solutions has excellent performance and service when it comes to HRIS. The team is always ready to support anytime and at any problem we may encounter in the system. They can be reached easily and they are just a text or call away. Their staff will then assist immediately to our needs."<br /></i></p>
+                                    <p><strong>Julita Limpangog Sevilla</strong>, HR Manager - PEBA Trading & Manufacturing Inc.<br /><br /></p>
+                                </div>
+                                <div class="item">
+                                    <p><i><br /><br />"Innosoft has a good service with great after sales personnel. Will provide your business with helpful modern technical solutions."<br /></i></p>
+                                    <p><strong>Ronald Tiongson</strong>, Owner - Dundee's Gift shop & Pasalubong<br /><br /><br /></p>
+                                </div>
+                                <div class="item">
+                                    <p><i><br /><br />"iPOS is Simple and user-friendly. You get the right information you needed without the complexities getting them."<br /></i></p>
+                                    <p><strong>Lance Lim</strong>, Manager - Family Drug<br /><br /><br /></p>
+                                </div>
+                                <div class="item">
+                                    <p><i><br /><br />"iFMIS is very comprehensive. All of its features were worth every penny I spent on this program"<br /></i></p>
+                                    <p><strong>Manolo Lao</strong>, Manager - Preman Distribution<br /><br /><br /><br /></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#twitter-->
+    <section id="contact">
+        <div class="map-wrap">
+            <div class="overlay" onClick="style.pointerEvents='none'"></div>
+            <iframe class="map" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7851.127052348251!2d123.8970618286828!3d10.296708435189553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a99eb4d4f75c7b%3A0x91d2680e9eae4ce6!2sInnosoft+Solutions!5e0!3m2!1sen!2sph!4v1464854211542" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="contact-us" class="parallax">
+            <div class="container">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+                        <h2><span class="fa fa-phone"></span> Contact Us</h2>
+                        <p>Get in Touch with Us!</p>
+                    </div>
+                </div>
+                <div class="wow fadeIn" data-wow-duration="1000ms" data-wow-delay="400ms">
+                    <div class="row">
+                        <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="col-md-6">
+                                <h3><span class="fa fa-gift" aria-hidden="true"></span> Free Support</h3>
+                                <ul class="ulcontact">
+                                    <li>Forum</li>
+                                    <li>One-day response time</li>
+                                    <li>Deployment of on-site technical support if necessary</li>
+                                </ul>
+                                <h3><span class="fa fa-wrench" aria-hidden="true"></span> Annual Subscription Support</h3>
+                                <ul class="ulcontact">
+                                    <li>Telephone Call, Call Ticket, Forum</li>
+                                    <li>One-hour response time</li>
+                                    <li>Remote support, e.g., Teamviewer, Logmein, etc.</li>
+                                    <li>Deployment of on-site technical support if necessary</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <h3><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact Us</h3>
+                                <address>
+                                    Innosoft Bldg. Corner V. Rama Avenue & R. Duterte St.
+                                    Guadalupe, Cebu City
+                                </address>
+                                <table>
+                                    <tr>
+                                        <td><span class="fa fa-phone" aria-hidden="true"></span></td>
+                                        <td>&nbsp;0932 591 5156 (SUN) / 0936 338 2541 (TM)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></td>
+                                        <td>&nbsp;(032) 266 3773 / 520 7245</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fa fa-envelope" aria-hidden="true"></span></td>
+                                        <td>&nbsp;<a href="mailto:info@innosoft.ph" style="color: inherit;">info@innosoft.ph</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fa fa-clock-o" aria-hidden="true"></span></td>
+                                        <td>&nbsp;Monday - Saturday: 9:00 AM to 6:00 PM</td>
+                                    <tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#contact-->
+    <footer id="footer">
+        <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
+            <div class="container text-center">
+                <div class="footer-logo">
+                    <a href="@Url.Action("Index","Home")"><img class="img-responsive" src="~/images/innosoftSmall.png" alt=""></a>
+                </div>
+                <div class="social-icons">
+                    <ul>
+                        <li><a class="twitter" href="https://twitter.com/InnosoftPH" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="facebook" href="https://www.facebook.com/InnosoftSolutionsInc" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="linkedin" href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a class="pinterest" href="https://www.pinterest.com/InnosoftPH/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a class="instagram" href="https://www.instagram.com/innosoftph/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p>&copy; 2016 Innosoft Solutions. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Start of Zopim Live Chat Script-->
+    <script type="text/javascript">
+        window.$zopim || (function (d, s) {
+            var z = $zopim = function (c) { z._.push(c) }, $ = z.s = d.createElement(s), e = d.getElementsByTagName(s)[0];
+            z.set = function (o) { z.set._.push(o) }; z._ = []; z.set._ = []; $.async = !0;
+            $.setAttribute("charset", "utf-8"); $.src = "//v2.zopim.com/?3zMDejZNIpvXeUE6u300YfRzhf53MLbR"; z.t = +new Date;
+            $.type = "text/javascript"; e.parentNode.insertBefore($, e)
+        })(document, "script");
+    </script>
+    <!--End of Zopim Live Chat Script-->
+    <nav class="social">
+        <ul>
+            <li><a href="https://twitter.com/InnosoftPH" target="_blank">Twitter <i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/InnosoftSolutionsInc" target="_blank">Facebook <i class="fa fa-facebook"></i></a></li>
+            <li><a href="#" target="_blank">Linked In <i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://www.pinterest.com/InnosoftPH/" target="_blank">Pinterest <i class="fa fa-pinterest"></i></a></li>
+            <li><a href="https://www.instagram.com/innosoftph/" target="_blank">Instagram <i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </nav>
+</body>
+</html>

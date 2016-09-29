@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="navbar main-nav navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                        <h1><img src="~/images/logo.png" alt=""></h1>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="scroll"><a href="#top">Home</a></li>
+                        <li class="scroll"><a href="#services">Service</a></li>
+                        <li class="scroll"><a href="#anchorabout-us">About Us</a></li>
+                        @*<li class="scroll"><a href="#portfolio">Products</a></li>*@
+                        <li class="dropdown scroll">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="scroll subli"><a href="#portfolio">Our Products</a></li>
+                                <li class="scroll subli"><a href="#POS">POS</a></li>
+                                <li class="scroll subli"><a href="#FMIS">FMIS</a></li>
+                                <li class="scroll subli"><a href="#EasyFIS">EasyFIS</a></li>
+                                <li class="scroll subli"><a href="#HRIS">HRIS</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown scroll">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clients <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="scroll subli"><a href="#menuClients">Our Clients</a></li>
+                                <li class="scroll subli"><a href="#menuTest">Testimonials</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll"><a href="#contact-us">Contact</a></li>
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Software", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--/#main-nav-->
+    }
+}
+else
+{
+    <div class="navbar main-nav navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                    <h1><img src="~/images/logo.png" alt=""></h1>
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="scroll"><a href="#top">Home</a></li>
+                    <li class="scroll"><a href="#services">Service</a></li>
+                    <li class="scroll"><a href="#anchorabout-us">About Us</a></li>
+                    @*<li class="scroll"><a href="#portfolio">Products</a></li>*@
+                    <li class="dropdown scroll">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="scroll subli"><a href="#portfolio">Our Products</a></li>
+                            <li class="scroll subli"><a href="#POS">POS</a></li>
+                            <li class="scroll subli"><a href="#FMIS">FMIS</a></li>
+                            <li class="scroll subli"><a href="#EasyFIS">EasyFIS</a></li>
+                            <li class="scroll subli"><a href="#HRIS">HRIS</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown scroll">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clients <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="scroll subli"><a href="#menuClients">Our Clients</a></li>
+                            <li class="scroll subli"><a href="#menuTest">Testimonials</a></li>
+                        </ul>
+                    </li>
+                    <li class="scroll"><a href="#contact-us">Contact</a></li>
+                    <li><a href="@Url.Action("Login","Account")">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!--/#main-nav-->
+}

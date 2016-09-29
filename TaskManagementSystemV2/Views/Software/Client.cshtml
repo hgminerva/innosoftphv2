@@ -1,0 +1,551 @@
+﻿
+@{
+    ViewBag.Title = "Client";
+}
+
+<head>
+    @Styles.Render("~/Content/styleD.css")
+</head>
+@Html.Partial("NavBar")
+
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h2>
+                Client List
+            </h2>
+            <ol class="breadcrumb">
+                <li><a href="../Software/Dashboard"><i class="fa fa-table"></i> Home</a></li>
+                <li class="active">Client</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--table container-->
+                    <div class="box">
+                        <div class="row">
+                            <div class="box-header">
+                                <div class="col-md-6">
+                                    <!--search box-->
+                                    <div class="box-tools">
+                                        <div class="input-group" style="width: 150px;">
+                                            <input type="text" class="form
+                                               -control input-sm" id="InputFilter" placeholder="Search">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-group-horizontal btn-sm pull-right">
+                                    <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
+                                    <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--table-->
+                        <table id="clientCollectionGrid" class="grid border-custom"></table>
+                    </div>
+                </div>
+            </div>
+            <!--navigation buttons-->
+            <div class="btn-group pull-right" id="navigationPageGrid">
+                <button type="button" class="btn btn-default border-custom" id="btnMoveToFirstPageGrid">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </button>
+                <button type="button" class="btn btn-default border-custom" id="btnMoveToPreviousPageGrid">
+                    <span class="glyphicon glyphicon-step-backward"></span>
+                </button>
+                <button type="button" class="btn btn-default border-custom" disabled style="width: 100px" id="btnCurrentPageGrid"></button>
+                <button type="button" class="btn btn-default border-custom" id="btnMoveToNextPageGrid">
+                    <span class="glyphicon glyphicon-step-forward"></span>
+                </button>
+                <button type="button" class="btn btn-default border-custom" id="btnMoveToLastPageGrid">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </button>
+            </div>
+        </section>
+    </div><!--Wrapper end-->
+    <!-- Company Delete -->
+    <div class="modal fade" id="deleteClientConfirm" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Client? <i class="fa fa-trash"></i></h4>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" id="cmdConfirmDeleteClient" onclick="cmdClientConfirmDeleteButton_OnClick()">Delete</button>
+                    <button id="cmdConfirmDeleteCloseButton" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="Loading..." aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 style="text-align:center; color:#000000;">Loading...</h4>
+                </div>
+                <div class="modal-footer">
+                    <img class="img-thumbnail img-responsive center-block img-custom" src='~/images/progress_bar.gif'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit/Update Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="addClient" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Client Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="add-form">
+                        <div class="form-group">
+                            <label for="itemCode" class="col-sm-3 control-label">Client Name</label>
+                            <div class="col-sm-7">
+                                <input type="hidden" class="" id="clientId">
+                                <input type="text" class="form-control requiredField" id="companyName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Company Address</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control requiredField" id="companyAddress">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Contact Number</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control requiredField" id="contactNumber">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnIdAddClient" onclick="cmdAddClient()">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/software-js")
+    <script type="text/javascript">
+
+        //================
+        // Global variables
+        // ================
+        var clientGrid;
+        var editClient;
+
+        var btnFirstPageGrid;
+        var btnPreviousPageGrid;
+        var btnNextPageGrid;
+        var btnLastPageGrid;
+        var btnCurrentPageGrid;
+        var clientList;
+
+        // =============================
+        // Get ClientMasterList Data
+        // =============================
+
+        function getClientMasterList() {
+           var clientList = new wijmo.collections.ObservableArray();
+            $("#loadingModal").modal("show");
+            $.ajax({
+                url: '/api/client/list',
+                cache: false,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                data: {},
+                success: function (results) {
+                    var lastClient = 0;
+                    $("#loadingModal").modal("hide");
+                    if (results.length > 0) {
+                        for (i = 0; i < results.length; i++) {
+                            clientList.push({
+                                EditId: "<button class='btn btn-primary btn-xs btn-block' id='clientEditButton' onClick='cmdClientEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
+                                DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='clientDeleteButton' onclick='cmdClientDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                                Id: results[i]["Id"],
+                                CompanyName: results[i]["CompanyName"],
+                                CompanyAddress: results[i]["CompanyAddress"],
+                                ContactNumber: results[i]["ContactNumber"],
+                                IsLocked: results[i]["IsLocked"]
+
+                            });
+                        }
+                    }
+                }
+            });
+
+            return clientList;
+        }
+
+
+
+        // ===================
+        // Show Add Modal Button
+        // ===================
+        function cmdShowAddModal_OnClick() {
+            $('#addClient').modal({
+                show: true,
+                backdrop: 'static'
+            });
+
+            $('.requiredField').each(function () {
+                $(this).css({
+                    "border": "",
+                });
+            });
+
+            document.getElementById("companyName").value = "";
+            document.getElementById("companyAddress").value = "";
+            document.getElementById("contactNumber").value = "";
+            document.getElementById("clientId").value = 0;
+            document.getElementById("btnIdAddClient").innerHTML = "Add"
+
+        }
+
+        // ===================
+        // Edit Modal Button
+        // ===================
+        function cmdClientEditButton_OnClick() {
+            $('#addClient').modal({
+                show: true,
+                backdrop: 'static'
+            });
+
+            $('.requiredField').each(function () {
+                $(this).css({
+                    "border": "",
+                });
+            });
+
+            document.getElementById("companyName").value = clientList.currentItem.CompanyName;
+            document.getElementById("companyAddress").value = clientList.currentItem.CompanyAddress;
+            document.getElementById("contactNumber").value = clientList.currentItem.ContactNumber;
+            document.getElementById("clientId").value = clientList.currentItem.Id;
+            document.getElementById("btnIdAddClient").innerHTML = "Update"
+        }
+
+        // ===================
+        // Refesh Grid only
+        // ===================
+        function refresh() {
+            clientList = new wijmo.collections.CollectionView(getClientMasterList());
+            clientList.canFilter = true;
+            clientList.pageSize = 15;
+
+            clientList.collectionChanged.addHandler(function (sender, args) {
+                updateNavigateButtonsCollection();
+            });
+
+            clientGrid.itemsSource = clientList;
+            clientGrid.trackChanges = true;
+
+        }
+
+        // =========================
+        //Client Entry Validation
+        // =========================
+        function clientEntryValidation() {
+            var isValid = true;
+            $('.requiredField').each(function () {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                } else {
+                    $(this).css({
+                        "border": "",
+                    });
+                }
+            });
+
+            return isValid;
+        }
+
+            // =====================
+            // Client Add/Update Button
+            // =====================
+                function cmdAddClient() {
+                var clientObject = new Object();
+                clientObject.CompanyName = document.getElementById("companyName").value;
+                clientObject.CompanyAddress = document.getElementById("companyAddress").value;
+                clientObject.ContactNumber = document.getElementById("contactNumber").value;
+
+                var data = JSON.stringify(clientObject);
+
+                var clientId = document.getElementById("clientId").value;
+                if (clientEntryValidation() == false) {
+                    toastr.error("Fill out form");
+
+                } else {
+                    if (clientId > 0) { //Update
+                        var itemdata = data;
+                        $('.dis').prop('disabled', true);
+                        $.ajax({
+                            url: '/api/client/update/' + clientId,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: itemdata,
+                            contentType: "application/json;charset=utf-8",
+                            cache: false,
+                            statusCode: {
+                                200: function () {
+                                    toastr.success("Update Sucess");
+                                    $('#addClient').modal('hide');
+                                    //$('#addClient').remove();
+                                    refresh();
+                                },
+                                404: function () {
+                                    toastr.error("Edit Failed");
+                                },
+                                400: function () {
+                                    toastr.error("Edit Failed");
+                                }
+                            }
+                        });
+
+                    } else { //Add
+                        $.ajax({
+                            url: '/api/client/add/',
+                            type: 'POST',
+                            data: data,
+                            contentType: "application/json;charset=utf-8",
+                            cache: false,
+                            statusCode: {
+                                200: function () {
+                                    $('#addClient').modal('hide');
+                                    toastr.success("Saved");
+                                    refresh();
+
+                                },
+                                400: function () {
+                                    toastr.error("Error");
+                                },
+                            }
+                        });
+                    }
+                }
+            }
+
+            // =====================
+            // Client delete Button
+            // =====================
+            function cmdClientDeleteButton_OnClick() {
+                var id = clientList.currentItem.Id;
+
+                console.log(typeof id + id);
+
+                $('#deleteClientConfirm').modal({
+                    show: true,
+                    backdrop: 'static'
+                });
+                $("#cmdConfirmDeleteClient").prop("disabled", false);
+                $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+            }
+            // Company Confirm Delete Button
+            function cmdClientConfirmDeleteButton_OnClick() {
+                $("#cmdConfirmDeleteClient").prop("disabled", true);
+                $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
+
+                //====================
+                var id = clientList.currentItem.Id;
+
+                $.ajax({
+                    url: '/api/client/delete/' + id,
+                    type: "DELETE",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    statusCode: {
+                        200: function () {
+                            $("#cmdConfirmDeleteClient").prop("disabled", true);
+                            $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
+                            $('#deleteClientConfirm').modal('hide');
+                            toastr.success("Successfully Deleted");
+                            refresh();
+                        },
+                        404: function () {
+                            toastr.error("Request Not Found");
+                            $('#deleteClientConfirm').modal('hide');
+                            $("#cmdConfirmDeleteClient").prop("disabled", false);
+                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+                        },
+                        400: function () {
+                            toastr.error("Can't be deleted");
+                            $('#deleteClientConfirm').modal('hide');
+                            $("#cmdConfirmDeleteClient").prop("disabled", false);
+                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+                        }
+                    }
+                });
+            }
+
+
+
+            //============
+            // On Page Load
+            // ============
+            $(document).ready(function () {
+                //localStorage.setClient("lastId", results[results.length - 1]["ItemCode"]);
+                clientList = new wijmo.collections.CollectionView(getClientMasterList());
+                clientList.canFilter = true;
+                clientList.pageSize = 15;
+
+                //Filter
+                var filterText = '';
+                $('#InputFilter').keydown(function () {
+                    filterText = this.value.toLowerCase();
+                    clientList.refresh();
+                });
+                clientList.filter = function (item) {
+                    return !filterText
+                    || (item.CompanyName.toLowerCase().indexOf(filterText) > -1)
+                    || (item.CompanyAddress.toLowerCase().indexOf(filterText) > -1)
+                }
+                clientList.collectionChanged.addHandler(function (sender, args) {
+                    updateNavigateButtonsCollection();
+
+                });
+                clientList.currentChanged.addHandler(function (sender, args) {
+                    updateNavigateButtonsCollection();
+                });
+
+                clientList.collectionChanged.addHandler(function (sender, args) {
+                    updateNavigateButtonsCollection();
+                });
+
+                //Flex Grid
+                clientGrid = new wijmo.grid.FlexGrid('#clientCollectionGrid');
+                clientGrid.initialize({
+                    columns: [
+
+
+                    {
+                        "header": "Edit",
+                        "binding": "EditId",
+                        "width": 70,
+                        "align": "center",
+                        "isContentHtml": true
+                    },
+                    {
+                        "header": "Delete",
+                        "binding": "DeleteId",
+                        "width": 90,
+                        "align": "center",
+                        "isContentHtml": true
+
+                    },
+                    {
+                        "header": "Company Name",
+                        "binding": "CompanyName",
+                        "align": "center",
+                        "allowSorting": true,
+                        "width": "5*"
+                    },
+                    {
+                        "header": "Company Address",
+                        "binding": "CompanyAddress",
+                        "align": "center",
+                        "allowSorting": true,
+                        "width": "5*"
+                    },
+                    {
+                        "header": "Contact Number",
+                        "binding": "ContactNumber",
+                        "align": "center",
+                        "allowSorting": true,
+                        "width": "3*"
+                    },
+                    {
+                        "header": "L",
+                        "binding": "IsLocked",
+                        "align": "center",
+                        "allowSorting": true,
+                        "width": ".5*"
+                    }],
+                    autoGenerateColumns: false,
+                    itemsSource: clientList,
+                    isReadOnly: true,
+                    autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                    allowDragging: wijmo.grid.AllowDragging.None,
+                    selectionMode: wijmo.grid.SelectionMode.Row
+                });
+
+                clientGrid.trackChanges = true;
+
+                // Navigation button
+                btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
+                btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
+                btnNextPageGrid = document.getElementById('btnMoveToNextPageGrid');
+                btnLastPageGrid = document.getElementById('btnMoveToLastPageGrid');
+                btnCurrentPageGrid = document.getElementById('btnCurrentPageGrid');
+
+                updateNavigateButtonsCollection();
+
+                btnFirstPageGrid.addEventListener('click', function () {
+                    clientList.moveToFirstPage();
+                    updateNavigateButtonsCollection();
+                });
+                btnPreviousPageGrid.addEventListener('click', function () {
+                    clientList.moveToPreviousPage();
+                    updateNavigateButtonsCollection();
+                });
+                btnNextPageGrid.addEventListener('click', function () {
+                    clientList.moveToNextPage();
+                    updateNavigateButtonsCollection();
+                });
+                btnLastPageGrid.addEventListener('click', function () {
+                    clientList.moveToLastPage();
+                    updateNavigateButtonsCollection();
+                });
+
+            });
+
+            // ==================
+            // Navigation Buttons
+            // ==================
+            function updateNavigateButtonsCollection() {
+                if (clientList.pageSize <= 0) {
+                    document.getElementById('navigationPageGrid').style.display = 'none';
+                    return;
+                }
+                document.getElementById('navigationPageGrid').style.display = 'block';
+                if (clientList.pageIndex === 0) {
+                    btnFirstPageGrid.setAttribute('disabled', 'disabled');
+                    btnPreviousPageGrid.setAttribute('disabled', 'disabled');
+                    btnNextPageGrid.removeAttribute('disabled');
+                    btnLastPageGrid.removeAttribute('disabled');
+                } else if (clientList.pageIndex === (clientList.pageCount - 1)) {
+                    btnFirstPageGrid.removeAttribute('disabled');
+                    btnPreviousPageGrid.removeAttribute('disabled');
+                    btnLastPageGrid.setAttribute('disabled', 'disabled');
+                    btnNextPageGrid.setAttribute('disabled', 'disabled');
+                } else {
+                    btnFirstPageGrid.removeAttribute('disabled');
+                    btnPreviousPageGrid.removeAttribute('disabled');
+                    btnNextPageGrid.removeAttribute('disabled');
+                    btnLastPageGrid.removeAttribute('disabled');
+                }
+                btnCurrentPageGrid.innerHTML = (clientList.pageIndex + 1) + ' / ' + clientList.pageCount;
+
+            }
+
+    </script>
+</div>
+@Html.Partial("Footer")

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../Content/login.css">
+    <link rel="stylesheet" href="../font-awesome-4.6.1/css/font-awesome.min.css">
+    @Styles.Render("~/Content/style.css")
+</head>
+
+<body class="home">
+    <div class="" style="width: 100%;">
+        <div style="text-align:center; margin: 0 auto; width: 500px;" class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> Register</div>
+            <div class="panel-body" style="overflow-y: hidden; ">
+                @Html.Partial("AccountRegister")
+            </div>
+        </div>
+    </div>
+</body>

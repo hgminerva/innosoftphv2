@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Log in";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../Content/login.css">
+    <link rel="stylesheet" href="../font-awesome-4.6.1/css/font-awesome.min.css">
+</head>
+
+<body class="home">
+
+    <!--.preloader-->
+    <div class="preloader"></div>
+    <!--/.preloader-->
+
+    <div class="wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" style="width: 100%;">
+        <div style="text-align:center; margin: 0 auto; width: 350px;" class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> User Login</div>
+            <div class="panel-body" style="overflow-y: hidden; ">
+                @Html.Partial("AccountLogin")
+                @*<div class="col-md-4">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/Scripts/jquery.stellar.js")
+    @Scripts.Render("~/Scripts/jquery.appear.js")
+    @Scripts.Render("~/Scripts/wow.min.js")
+</body>

@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Calls";
+}
+
+<head>
+    @Styles.Render("~/Content/styleD.css")
+</head>
+@Html.Partial("NavBar")
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header)-- -->
+        <section class="content-header">
+            <h2>
+                Calls
+            </h2>
+            <ol class="breadcrumb">
+                <li><a href="../Software/Dashboard"><i class="fa fa-table"></i> Home</a></li>
+                <li class="active">Calls</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--table container-->
+                    <div class="box">
+                        <div class="row">
+                            <div class="box-header">
+                                <div class="btn-group-horizontal btn-sm pull-right">
+                                    <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
+                                    <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--table-->
+                        <div class="row">
+                            <ul class="nav nav-pills nav-stacked pill-custom col-md-4">
+                                <li class="active"><a href="#callsCustomer" data-toggle="pill">Calls Per Customer</a></li>
+                                <li><a class="" href="#callsProduct" data-toggle="pill">Calls Per Product</a></li>
+                                <li><a href="#callsStaffAss" data-toggle="pill">Calls Per Staff Assigned</a></li>
+                                <li><a href="#callsTypeStaff" data-toggle="pill">Calls Per Problem Type (Staff)</a></li>
+                                <li><a href="#callsTypeCust" data-toggle="pill">Calls Per Problem Type (Customer)</a></li>
+                                <li><a href="#callsMonth" data-toggle="pill">Calls Per Month</a></li>
+                                <li><a href="#callsSummary" data-toggle="pill">Call Summary</a></li>
+                                <li><a href="#callsDetail" data-toggle="pill">Call Detail</a></li>
+                                <li><a href="#callsStaffAct" data-toggle="pill">Call Per Staff Activity</a></li>
+                            </ul>
+                            <div class="tab-content col-md-8">
+                                <div class="tab-pane active" id="callsCustomer">
+                                    <h4 class="breadcrumb">Calls Per Customer</h4>
+                                    @*<div class="">*@
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="startDateDiv" class="col-sm-2 control-label">Start Date</label>
+                                                <div class="col-sm-9">
+                                                    <div id="startDateDiv"></div>
+                                                    <wj-calendar min="2014-8-1" value="startDate">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="endDateDiv" class="col-sm-2 control-label">End Date</label>
+                                                <div class="col-sm-9">
+                                                    <div id="endDateDiv"></div>
+                                                    <wj-calendar min="2014-8-1" value="endDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @*</div>*@
+                                    </div>
+                                    <div class="tab-pane" id="callsProduct">
+                                        <h4 class="breadcrumb">Calls Per Product</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsStaffAss">
+                                        <h4 class="breadcrumb">Calls Per Staff Assigned</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsTypeStaff">
+                                        <h4 class="breadcrumb">Calls Per Problem Type (Staff)</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsTypeCust">
+                                        <h4 class="breadcrumb">Calls Per Problem Type (Customer)</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsMonth">
+                                        <h4 class="breadcrumb">Calls Per Month</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsSummary">
+                                        <h4 class="breadcrumb">Call Summary</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsDetail">
+                                        <h4 class="breadcrumb">Call Detail</h4>
+
+                                    </div>
+                                    <div class="tab-pane" id="callsStaffAct">
+                                        <h4 class="breadcrumb">Call Per Staff Activity</h4>
+
+                                    </div>
+                                    </div><!-- tab content -->
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/software-js")
+<script type="text/javascript">
+
+    // ============
+    // On Page Load
+    // ============
+
+    var inptStartDate;
+    var inptEndDate;
+
+    $(document).ready(function () {
+
+        //Start Date
+        startDate = new Date();
+        inptStartDate = new wijmo.input.InputDate('#startDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: startDate,
+            disabled: false
+        });
+
+        //End Date
+        endDate = new Date();
+        inptStartDate = new wijmo.input.InputDate('#endDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: endDate,
+            disabled: false
+        });
+
+    });
+
+</script>
+
+@Html.Partial("Footer")
