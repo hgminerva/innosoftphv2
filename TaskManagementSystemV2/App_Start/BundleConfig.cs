@@ -37,7 +37,7 @@ namespace TaskManagementSystemV2
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.min.css",
                       "~/Content/bootstrap-dropdown.min.css",
-                      "~/font-awesome-4.6.1/css/font-awesome.min.css",
+                      "~/fonts/font-awesome-4.6.1/css/font-awesome.min.css",
                       "~/Content/owl.carousel.css",
                       "~/Content/owl.theme.css",
                       "~/Content/owl.transitions.css",

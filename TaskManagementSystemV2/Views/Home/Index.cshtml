@@ -6,13 +6,14 @@
 <head>
     @Styles.Render("~/Content/main.css")
     @Styles.Render("~/Content/preset1.css")
+    <link rel="stylesheet" href="../fonts/font-awesome-4.6.1/css/font-awesome.min.css">
 </head><!--/head-->
 <body id="top">
     <!--.preloader-->
     <div class="preloader"></div>
     <!--/.preloader-->
     <header id="home">
-       @Html.Partial("HomeHeader")
+        @Html.Partial("HomeHeader")
         <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="item active">
@@ -630,7 +631,7 @@
     </section><!--/#twitter-->
     <section id="contact">
         <div class="map-wrap">
-            <div class="overlay" onClick="style.pointerEvents='none'"></div>
+            <div class="overlay" onclick="style.pointerEvents='none'"></div>
             <iframe class="map" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7851.127052348251!2d123.8970618286828!3d10.296708435189553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a99eb4d4f75c7b%3A0x91d2680e9eae4ce6!2sInnosoft+Solutions!5e0!3m2!1sen!2sph!4v1464854211542" frameborder="0" allowfullscreen></iframe>
         </div>
         <div id="contact-us" class="parallax">
