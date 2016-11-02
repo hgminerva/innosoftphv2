@@ -515,7 +515,9 @@
     <Content Include="wijmo\styles\themes\wijmo.theme.zen.min.css" />
     <Content Include="wijmo\styles\wijmo.css" />
     <Content Include="wijmo\styles\wijmo.min.css" />
+    <None Include="Properties\PublishProfiles\innosoftwebsite - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\innosoftwebsite - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\innosoftwebsite - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\innosoftwebsite - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\html5shiv.min.js" />
