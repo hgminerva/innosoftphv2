@@ -4,6 +4,7 @@
 
 <head>
     @Styles.Render("~/Content/styleD.css")
+    <link rel="stylesheet" href="../fonts/font-awesome-4.6.1/css/font-awesome.min.css">
 </head>
 @Html.Partial("NavBar")
 <div class="container">
@@ -48,59 +49,59 @@
                                 <div class="tab-pane active" id="callsCustomer">
                                     <h4 class="breadcrumb">Calls Per Customer</h4>
                                     @*<div class="">*@
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label for="startDateDiv" class="col-sm-2 control-label">Start Date</label>
-                                                <div class="col-sm-9">
-                                                    <div id="startDateDiv"></div>
-                                                    <wj-calendar min="2014-8-1" value="startDate">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="endDateDiv" class="col-sm-2 control-label">End Date</label>
-                                                <div class="col-sm-9">
-                                                    <div id="endDateDiv"></div>
-                                                    <wj-calendar min="2014-8-1" value="endDate">
-                                                </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="startDateDiv" class="col-sm-2 control-label">Start Date</label>
+                                            <div class="col-sm-9">
+                                                <div id="startDateDiv"></div>
+                                                <wj-calendar min="2014-8-1" value="startDate">
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="endDateDiv" class="col-sm-2 control-label">End Date</label>
+                                            <div class="col-sm-9">
+                                                <div id="endDateDiv"></div>
+                                                <wj-calendar min="2014-8-1" value="endDate">
+                                            </div>
+                                        </div>
+                                    </div>
                                     @*</div>*@
-                                    </div>
-                                    <div class="tab-pane" id="callsProduct">
-                                        <h4 class="breadcrumb">Calls Per Product</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsStaffAss">
-                                        <h4 class="breadcrumb">Calls Per Staff Assigned</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsTypeStaff">
-                                        <h4 class="breadcrumb">Calls Per Problem Type (Staff)</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsTypeCust">
-                                        <h4 class="breadcrumb">Calls Per Problem Type (Customer)</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsMonth">
-                                        <h4 class="breadcrumb">Calls Per Month</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsSummary">
-                                        <h4 class="breadcrumb">Call Summary</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsDetail">
-                                        <h4 class="breadcrumb">Call Detail</h4>
-
-                                    </div>
-                                    <div class="tab-pane" id="callsStaffAct">
-                                        <h4 class="breadcrumb">Call Per Staff Activity</h4>
-
-                                    </div>
-                                    </div><!-- tab content -->
                                 </div>
+                                <div class="tab-pane" id="callsProduct">
+                                    <h4 class="breadcrumb">Calls Per Product</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsStaffAss">
+                                    <h4 class="breadcrumb">Calls Per Staff Assigned</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsTypeStaff">
+                                    <h4 class="breadcrumb">Calls Per Problem Type (Staff)</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsTypeCust">
+                                    <h4 class="breadcrumb">Calls Per Problem Type (Customer)</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsMonth">
+                                    <h4 class="breadcrumb">Calls Per Month</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsSummary">
+                                    <h4 class="breadcrumb">Call Summary</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsDetail">
+                                    <h4 class="breadcrumb">Call Detail</h4>
+
+                                </div>
+                                <div class="tab-pane" id="callsStaffAct">
+                                    <h4 class="breadcrumb">Call Per Staff Activity</h4>
+
+                                </div>
+                            </div><!-- tab content -->
+                        </div>
                     </div>
                 </div>
             </div>

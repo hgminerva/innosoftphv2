@@ -1,10 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EditTask";
 }
 
 <head>
     @Styles.Render("~/Content/styleD.css")
+    <link rel="stylesheet" href="../fonts/font-awesome-4.6.1/css/font-awesome.min.css">
 </head>
 @Html.Partial("NavBar")
 
@@ -443,8 +443,8 @@
                         taskSubId = results[i]["Id"];
                         taskSubDateCalled = new Date(results[i]["DateCalled"]);
                         taskSubFinishedDate = new Date(results[i]["FinishedDate"]);
-                        taskSubTimeCalled =  new Date(results[i]["TimeCalled"]);
-                        taskSubFinishedTime =  new Date(results[i]["FinishedTime"]);
+                        taskSubTimeCalled = new Date(results[i]["TimeCalled"]);
+                        taskSubFinishedTime = new Date(results[i]["FinishedTime"]);
 
                         //var timeCalled = taskSubTimeCalled.split(" ");
                         //timeCalled = timeCalled.filter(function (n) { return n != "" });
@@ -501,7 +501,8 @@
 
         var data = JSON.stringify(taskSubObject);
         if (taskEntryValidation() == false) {
-            toastr.error("Fill out form");  }
+            toastr.error("Fill out form");
+        }
         else {
             if (userId > 0) { //Add
                 $.ajax({
@@ -675,45 +676,45 @@
                 if (results.length > 0) {
                     //console.log("Task");
                     var i = 0;
-                        var name = "";
-                        document.getElementById("taskDateDiv").value = results[i]["TaskDate"];
-                        document.getElementById("taskNoDiv").value = results[i]["TaskNo"];
-                        cboClientNameSelectedValue = results[i]["ClientId"];
-                        cboProductNameSelectedValue = results[i]["ProductId"];
-                        document.getElementById("callerDiv").value = results[i]["Caller"];
-                        document.getElementById("concernDiv").value = results[i]["Concern"];
-                        cboStaffNameSelectedValue = results[i]["AnsweredBy"];
-                        cboAssignedStaffNameSelectedValue = results[i]["StaffId"];
-                        document.getElementById("remarksDiv").value = results[i]["Remarks"];
-                        cboProblemType.selectedValue = results[i]["ProblemType"];
-                        cboSeverity.selectedValue = results[i]["Severity"];
-                        cboStatus.selectedValue = results[i]["Status"];
-                        document.getElementById("solutionDiv").value = results[i]["Solution"];
-                        cboStaffVerifiedSelectedValue = results[i]["VerifiedBy"];
-                        cboDateSelectedValue = results[i]["DoneDate"];
-                        doneTimeSelectedValue = results[i]["DoneTime"];
-                        //console.log(doneTimeSelectedValue);
+                    var name = "";
+                    document.getElementById("taskDateDiv").value = results[i]["TaskDate"];
+                    document.getElementById("taskNoDiv").value = results[i]["TaskNo"];
+                    cboClientNameSelectedValue = results[i]["ClientId"];
+                    cboProductNameSelectedValue = results[i]["ProductId"];
+                    document.getElementById("callerDiv").value = results[i]["Caller"];
+                    document.getElementById("concernDiv").value = results[i]["Concern"];
+                    cboStaffNameSelectedValue = results[i]["AnsweredBy"];
+                    cboAssignedStaffNameSelectedValue = results[i]["StaffId"];
+                    document.getElementById("remarksDiv").value = results[i]["Remarks"];
+                    cboProblemType.selectedValue = results[i]["ProblemType"];
+                    cboSeverity.selectedValue = results[i]["Severity"];
+                    cboStatus.selectedValue = results[i]["Status"];
+                    document.getElementById("solutionDiv").value = results[i]["Solution"];
+                    cboStaffVerifiedSelectedValue = results[i]["VerifiedBy"];
+                    cboDateSelectedValue = results[i]["DoneDate"];
+                    doneTimeSelectedValue = results[i]["DoneTime"];
+                    //console.log(doneTimeSelectedValue);
 
-                        result.push({
-                            Id: results[i]["Id"],
-                            TaskNo: results[i]["TaskNo"],
-                            TaskDate: results[i]["TaskDate"],
-                            ClientId: results[i]["ClientId"],
-                            Caller: results[i]["Caller"],
-                            Concern: results[i]["Concern"],
-                            AnsweredBy: results[i]["AnsweredBy"],
-                            StaffId: results[i]["StaffId"],
-                            ProductId: results[i]["ProductId"],
-                            Remarks: results[i]["Remarks"],
-                            Status: results[i]["Status"],
-                            ProblemType: results[i]["ProblemType"],
-                            Severity: results[i]["Severity"],
-                            Solution: results[i]["Solution"],
-                            DoneDate: results[i]["DoneDate"],
-                            DoneTime: results[i]["DoneTime"],
-                            VerifiedBy: results[i]["VerifiedBy"],
-                            IsLocked: results[i]["IsLocked"]
-                        });
+                    result.push({
+                        Id: results[i]["Id"],
+                        TaskNo: results[i]["TaskNo"],
+                        TaskDate: results[i]["TaskDate"],
+                        ClientId: results[i]["ClientId"],
+                        Caller: results[i]["Caller"],
+                        Concern: results[i]["Concern"],
+                        AnsweredBy: results[i]["AnsweredBy"],
+                        StaffId: results[i]["StaffId"],
+                        ProductId: results[i]["ProductId"],
+                        Remarks: results[i]["Remarks"],
+                        Status: results[i]["Status"],
+                        ProblemType: results[i]["ProblemType"],
+                        Severity: results[i]["Severity"],
+                        Solution: results[i]["Solution"],
+                        DoneDate: results[i]["DoneDate"],
+                        DoneTime: results[i]["DoneTime"],
+                        VerifiedBy: results[i]["VerifiedBy"],
+                        IsLocked: results[i]["IsLocked"]
+                    });
 
 
                     //DONE DATE
@@ -775,7 +776,7 @@
                         if (hh != 12) {
                             fhour = parseInt(hour[0], 10);
                             dTime.setHours(fhour + 12);
-                           console.log(fhour);
+                            console.log(fhour);
                         } else {
                             fhour = parseInt(hour[0], 10);
                             dTime.setHours(fhour);
@@ -798,7 +799,7 @@
                     console.log(dTime);
 
                     // DONE TIME
-                        inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
+                    inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
                         min: new Date(2014, 8, 1, 7, 0),
                         max: new Date(2014, 8, 1, 20, 0),
                         step: 1,
@@ -809,9 +810,9 @@
                             doneTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
 
                         }
-                        });
-                        doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
-                        getStaffName();
+                    });
+                    doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
+                    getStaffName();
                 }
 
 

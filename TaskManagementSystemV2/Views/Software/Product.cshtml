@@ -1,10 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Product";
 }
 
 <head>
     @Styles.Render("~/Content/styleD.css")
+    <link rel="stylesheet" href="../fonts/font-awesome-4.6.1/css/font-awesome.min.css">
 </head>
 @Html.Partial("NavBar")
 
@@ -157,7 +157,7 @@
         // =============================
 
         function getProductMasterList() {
-           var productList = new wijmo.collections.ObservableArray();
+            var productList = new wijmo.collections.ObservableArray();
             $("#loadingModal").modal("show");
             $.ajax({
                 url: '/api/product/list',
@@ -270,264 +270,264 @@
             return isValid;
         }
 
-            // =====================
-            // Product Add/Update Button
-            // =====================
-                function cmdAddProduct() {
-                var productObject = new Object();
-                productObject.ProductCode = document.getElementById("productCode").value;
-                productObject.ProductDescription = document.getElementById("productDescription").value;
+        // =====================
+        // Product Add/Update Button
+        // =====================
+        function cmdAddProduct() {
+            var productObject = new Object();
+            productObject.ProductCode = document.getElementById("productCode").value;
+            productObject.ProductDescription = document.getElementById("productDescription").value;
 
-                var data = JSON.stringify(productObject);
+            var data = JSON.stringify(productObject);
 
-                var productId = document.getElementById("productId").value;
-                if (productEntryValidation() == false) {
-                    toastr.error("Fill out form");
+            var productId = document.getElementById("productId").value;
+            if (productEntryValidation() == false) {
+                toastr.error("Fill out form");
 
-                } else {
-                    if (productId > 0) { //Update
-                        var itemdata = data;
-                        $('.dis').prop('disabled', true);
-                        $.ajax({
-                            url: '/api/product/update/' + productId,
-                            type: 'PUT',
-                            dataType: 'json',
-                            data: itemdata,
-                            contentType: "application/json;charset=utf-8",
-                            cache: false,
-                            statusCode: {
-                                200: function () {
-                                    toastr.success("Update Sucess");
-                                    $('#addProduct').modal('hide');
-                                    //$('#addStaff').remove();
-                                    refresh();
-                                },
-                                404: function () {
-                                    toastr.error("Edit Failed");
-                                },
-                                400: function () {
-                                    toastr.error("Edit Failed");
-                                }
+            } else {
+                if (productId > 0) { //Update
+                    var itemdata = data;
+                    $('.dis').prop('disabled', true);
+                    $.ajax({
+                        url: '/api/product/update/' + productId,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: itemdata,
+                        contentType: "application/json;charset=utf-8",
+                        cache: false,
+                        statusCode: {
+                            200: function () {
+                                toastr.success("Update Sucess");
+                                $('#addProduct').modal('hide');
+                                //$('#addStaff').remove();
+                                refresh();
+                            },
+                            404: function () {
+                                toastr.error("Edit Failed");
+                            },
+                            400: function () {
+                                toastr.error("Edit Failed");
                             }
-                        });
-
-                    } else { //Add
-                        $.ajax({
-                            url: '/api/product/add/',
-                            type: 'POST',
-                            data: data,
-                            contentType: "application/json;charset=utf-8",
-                            cache: false,
-                            statusCode: {
-                                200: function () {
-                                    $('#addProduct').modal('hide');
-                                    toastr.success("Saved");
-                                    refresh();
-
-                                },
-                                400: function () {
-                                    alert("Error");
-                                },
-                            }
-                        });
-                    }
-                }
-            }
-
-            // =====================
-            // Product delete Button
-            // =====================
-                function cmdProductDeleteButton_OnClick() {
-                var id = productList.currentItem.Id;
-
-                console.log(typeof id + id);
-
-                $('#deleteProductConfirm').modal({
-                    show: true,
-                    backdrop: 'static'
-                });
-                $("#cmdConfirmDeleteProduct").prop("disabled", false);
-                $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
-            }
-            // Company Confirm Delete Button
-                function cmdProductConfirmDeleteButton_OnClick() {
-                $("#cmdConfirmDeleteProduct").prop("disabled", true);
-                $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
-
-                //====================
-                var id = productList.currentItem.Id;
-
-                $.ajax({
-                    url: '/api/product/delete/' + id,
-                    type: "DELETE",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    statusCode: {
-                        200: function () {
-                            $("#cmdConfirmDeleteProduct").prop("disabled", true);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
-                            $('#deleteProductConfirm').modal('hide');
-                            toastr.success("Successfully Deleted");
-                            refresh();
-                        },
-                        404: function () {
-                            toastr.error("Request Not Found");
-                            $('#deleteProductConfirm').modal('hide');
-                            $("#cmdConfirmDeleteProduct").prop("disabled", false);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
-                        },
-                        400: function () {
-                            toastr.error("Can't be deleted");
-                            $('#deleteProductConfirm').modal('hide');
-                            $("#cmdConfirmDeleteProduct").prop("disabled", false);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
                         }
-                    }
-                });
-            }
+                    });
 
+                } else { //Add
+                    $.ajax({
+                        url: '/api/product/add/',
+                        type: 'POST',
+                        data: data,
+                        contentType: "application/json;charset=utf-8",
+                        cache: false,
+                        statusCode: {
+                            200: function () {
+                                $('#addProduct').modal('hide');
+                                toastr.success("Saved");
+                                refresh();
 
-
-            //============
-            // On Page Load
-            // ============
-            $(document).ready(function () {
-                //localStorage.setProduct("lastId", results[results.length - 1]["ItemCode"]);
-                productList = new wijmo.collections.CollectionView(getProductMasterList());
-                productList.canFilter = true;
-                productList.pageSize = 15;
-
-                //Filter
-                var filterText = '';
-                $('#InputFilter').keydown(function () {
-                    filterText = this.value.toLowerCase();
-                    productList.refresh();
-                });
-                productList.filter = function (item) {
-                    return !filterText
-                    || (item.ProductCode.toLowerCase().indexOf(filterText) > -1)
-                    || (item.ProductDescription.toLowerCase().indexOf(filterText) > -1)
+                            },
+                            400: function () {
+                                alert("Error");
+                            },
+                        }
+                    });
                 }
-                productList.collectionChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
+            }
+        }
 
-                });
-                productList.currentChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
-                });
+        // =====================
+        // Product delete Button
+        // =====================
+        function cmdProductDeleteButton_OnClick() {
+            var id = productList.currentItem.Id;
 
-                productList.collectionChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
-                });
+            console.log(typeof id + id);
 
-                //Flex Grid
-                productGrid = new wijmo.grid.FlexGrid('#productCollectionGrid');
-                productGrid.initialize({
-                    columns: [
+            $('#deleteProductConfirm').modal({
+                show: true,
+                backdrop: 'static'
+            });
+            $("#cmdConfirmDeleteProduct").prop("disabled", false);
+            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+        }
+        // Company Confirm Delete Button
+        function cmdProductConfirmDeleteButton_OnClick() {
+            $("#cmdConfirmDeleteProduct").prop("disabled", true);
+            $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
 
+            //====================
+            var id = productList.currentItem.Id;
 
-                    {
-                        "header": "Edit",
-                        "binding": "EditId",
-                        "width": 70,
-                        "align": "center",
-                        "isContentHtml": true
+            $.ajax({
+                url: '/api/product/delete/' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        $("#cmdConfirmDeleteProduct").prop("disabled", true);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
+                        $('#deleteProductConfirm').modal('hide');
+                        toastr.success("Successfully Deleted");
+                        refresh();
                     },
-                    {
-                        "header": "Delete",
-                        "binding": "DeleteId",
-                        "width": 90,
-                        "align": "center",
-                        "isContentHtml": true
-
+                    404: function () {
+                        toastr.error("Request Not Found");
+                        $('#deleteProductConfirm').modal('hide');
+                        $("#cmdConfirmDeleteProduct").prop("disabled", false);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
                     },
-                    {
-                        "header": "Product Code",
-                        "binding": "ProductCode",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "2.5*"
-                    },
-                    {
-                        "header": "Product Description",
-                        "binding": "ProductDescription",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "5*"
-                    },
-                    {
-                        "header": "L",
-                        "binding": "IsLocked",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "1.5*"
-                    }],
-                    autoGenerateColumns: false,
-                    itemsSource: productList,
-                    isReadOnly: true,
-                    autoSizeMode: wijmo.grid.AutoSizeMode.Both,
-                    allowDragging: wijmo.grid.AllowDragging.None,
-                    selectionMode: wijmo.grid.SelectionMode.Row
-                });
+                    400: function () {
+                        toastr.error("Can't be deleted");
+                        $('#deleteProductConfirm').modal('hide');
+                        $("#cmdConfirmDeleteProduct").prop("disabled", false);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+                    }
+                }
+            });
+        }
 
-                productGrid.trackChanges = true;
 
-                // Navigation button
-                btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
-                btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
-                btnNextPageGrid = document.getElementById('btnMoveToNextPageGrid');
-                btnLastPageGrid = document.getElementById('btnMoveToLastPageGrid');
-                btnCurrentPageGrid = document.getElementById('btnCurrentPageGrid');
 
+        //============
+        // On Page Load
+        // ============
+        $(document).ready(function () {
+            //localStorage.setProduct("lastId", results[results.length - 1]["ItemCode"]);
+            productList = new wijmo.collections.CollectionView(getProductMasterList());
+            productList.canFilter = true;
+            productList.pageSize = 15;
+
+            //Filter
+            var filterText = '';
+            $('#InputFilter').keydown(function () {
+                filterText = this.value.toLowerCase();
+                productList.refresh();
+            });
+            productList.filter = function (item) {
+                return !filterText
+                || (item.ProductCode.toLowerCase().indexOf(filterText) > -1)
+                || (item.ProductDescription.toLowerCase().indexOf(filterText) > -1)
+            }
+            productList.collectionChanged.addHandler(function (sender, args) {
                 updateNavigateButtonsCollection();
 
-                btnFirstPageGrid.addEventListener('click', function () {
-                    productList.moveToFirstPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnPreviousPageGrid.addEventListener('click', function () {
-                    productList.moveToPreviousPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnNextPageGrid.addEventListener('click', function () {
-                    productList.moveToNextPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnLastPageGrid.addEventListener('click', function () {
-                    productList.moveToLastPage();
-                    updateNavigateButtonsCollection();
-                });
-
+            });
+            productList.currentChanged.addHandler(function (sender, args) {
+                updateNavigateButtonsCollection();
             });
 
-            // ==================
-            // Navigation Buttons
-            // ==================
-            function updateNavigateButtonsCollection() {
-                if (productList.pageSize <= 0) {
-                    document.getElementById('navigationPageGrid').style.display = 'none';
-                    return;
-                }
-                document.getElementById('navigationPageGrid').style.display = 'block';
-                if (productList.pageIndex === 0) {
-                    btnFirstPageGrid.setAttribute('disabled', 'disabled');
-                    btnPreviousPageGrid.setAttribute('disabled', 'disabled');
-                    btnNextPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.removeAttribute('disabled');
-                } else if (productList.pageIndex === (productList.pageCount - 1)) {
-                    btnFirstPageGrid.removeAttribute('disabled');
-                    btnPreviousPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.setAttribute('disabled', 'disabled');
-                    btnNextPageGrid.setAttribute('disabled', 'disabled');
-                } else {
-                    btnFirstPageGrid.removeAttribute('disabled');
-                    btnPreviousPageGrid.removeAttribute('disabled');
-                    btnNextPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.removeAttribute('disabled');
-                }
-                btnCurrentPageGrid.innerHTML = (productList.pageIndex + 1) + ' / ' + productList.pageCount;
+            productList.collectionChanged.addHandler(function (sender, args) {
+                updateNavigateButtonsCollection();
+            });
 
+            //Flex Grid
+            productGrid = new wijmo.grid.FlexGrid('#productCollectionGrid');
+            productGrid.initialize({
+                columns: [
+
+
+                {
+                    "header": "Edit",
+                    "binding": "EditId",
+                    "width": 70,
+                    "align": "center",
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Delete",
+                    "binding": "DeleteId",
+                    "width": 90,
+                    "align": "center",
+                    "isContentHtml": true
+
+                },
+                {
+                    "header": "Product Code",
+                    "binding": "ProductCode",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "2.5*"
+                },
+                {
+                    "header": "Product Description",
+                    "binding": "ProductDescription",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "5*"
+                },
+                {
+                    "header": "L",
+                    "binding": "IsLocked",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "1.5*"
+                }],
+                autoGenerateColumns: false,
+                itemsSource: productList,
+                isReadOnly: true,
+                autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                allowDragging: wijmo.grid.AllowDragging.None,
+                selectionMode: wijmo.grid.SelectionMode.Row
+            });
+
+            productGrid.trackChanges = true;
+
+            // Navigation button
+            btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
+            btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
+            btnNextPageGrid = document.getElementById('btnMoveToNextPageGrid');
+            btnLastPageGrid = document.getElementById('btnMoveToLastPageGrid');
+            btnCurrentPageGrid = document.getElementById('btnCurrentPageGrid');
+
+            updateNavigateButtonsCollection();
+
+            btnFirstPageGrid.addEventListener('click', function () {
+                productList.moveToFirstPage();
+                updateNavigateButtonsCollection();
+            });
+            btnPreviousPageGrid.addEventListener('click', function () {
+                productList.moveToPreviousPage();
+                updateNavigateButtonsCollection();
+            });
+            btnNextPageGrid.addEventListener('click', function () {
+                productList.moveToNextPage();
+                updateNavigateButtonsCollection();
+            });
+            btnLastPageGrid.addEventListener('click', function () {
+                productList.moveToLastPage();
+                updateNavigateButtonsCollection();
+            });
+
+        });
+
+        // ==================
+        // Navigation Buttons
+        // ==================
+        function updateNavigateButtonsCollection() {
+            if (productList.pageSize <= 0) {
+                document.getElementById('navigationPageGrid').style.display = 'none';
+                return;
             }
+            document.getElementById('navigationPageGrid').style.display = 'block';
+            if (productList.pageIndex === 0) {
+                btnFirstPageGrid.setAttribute('disabled', 'disabled');
+                btnPreviousPageGrid.setAttribute('disabled', 'disabled');
+                btnNextPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.removeAttribute('disabled');
+            } else if (productList.pageIndex === (productList.pageCount - 1)) {
+                btnFirstPageGrid.removeAttribute('disabled');
+                btnPreviousPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.setAttribute('disabled', 'disabled');
+                btnNextPageGrid.setAttribute('disabled', 'disabled');
+            } else {
+                btnFirstPageGrid.removeAttribute('disabled');
+                btnPreviousPageGrid.removeAttribute('disabled');
+                btnNextPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.removeAttribute('disabled');
+            }
+            btnCurrentPageGrid.innerHTML = (productList.pageIndex + 1) + ' / ' + productList.pageCount;
+
+        }
 
     </script>
 </div>
