@@ -22,9 +22,8 @@ namespace TaskManagementSystemV2.Controllers
             document.SetMargins(30f, 30f, 30f, 30f);
             PdfWriter.GetInstance(document, workStream).CloseStream = false;
 
-            string imagepath = Server.MapPath("images");
-
-            Image logo = Image.GetInstance(imagepath + "/callTicketHeader.png");
+            string imagepath = Server.MapPath("~/images/callTicketHeader.png");
+            Image logo = Image.GetInstance(imagepath);
 
             logo.ScalePercent(70f);
 
@@ -256,9 +255,5 @@ namespace TaskManagementSystemV2.Controllers
 
             return new FileStreamResult(workStream, "application/pdf");
         }
-
-
     }
-
-    
 }
