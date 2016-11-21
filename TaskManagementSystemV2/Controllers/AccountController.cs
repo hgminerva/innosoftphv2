@@ -178,6 +178,7 @@ namespace TaskManagementSystemV2.Controllers
                     newUser.Password = model.Password;
                     newUser.Designation = 0;
                     newUser.IsLocked = true;
+                    newUser.AspNetUserId = user.Id;
 
                     db.mstUsers.InsertOnSubmit(newUser);
                     db.SubmitChanges();

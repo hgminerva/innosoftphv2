@@ -1,10 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AddTask";
 }
 
 <head>
     @Styles.Render("~/Content/styleD.css")
+    <link rel="stylesheet" href="../fonts/font-awesome-4.6.1/css/font-awesome.min.css">
 </head>
 @Html.Partial("NavBar")
 
@@ -24,8 +24,8 @@
         <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
         <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Cancel</a>
     </div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <div class="row">
         <form class="form-horizontal" id="add-form">
             <div class="row">
@@ -124,7 +124,7 @@
             <li class="active"><a data-toggle="tab" href="#home">Action</a></li>
             <li><a data-toggle="tab" href="#menu1">Solution</a></li>
         </ul>
-       
+
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <form class="form-horizontal" id="add-form">
@@ -136,24 +136,24 @@
                                     <textarea type="" class="form-control" id="actionDiv"></textarea>
                                 </div>
                             </div>
-                           
-                                
-                                    <div class="form-group">
-                                        <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
-                                        <div class="col-sm-4">
-                                            <div id="dateCalledDiv"></div>
-                                        </div>
-                                    </div>
-                              
-                                
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Time Called</label>
-                                        <div class="col-sm-4">
-                                            <div id="timeCalledDiv"></div>
-                                        </div>
-                                    </div>
-                               
-                           
+
+
+                            <div class="form-group">
+                                <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
+                                <div class="col-sm-4">
+                                    <div id="dateCalledDiv"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Time Called</label>
+                                <div class="col-sm-4">
+                                    <div id="timeCalledDiv"></div>
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="" class="col-sm-2 control-label">Finished Date</label>
                                 <div class="col-sm-6">
@@ -193,14 +193,14 @@
                                         <div id="doneDateDiv"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
                                     <div class="col-sm-6">
                                         <div id="doneTimeDiv"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="doneDateDiv" class="col-sm-2 control-label">Verified by</label>
                                     <div class="col-sm-6">
@@ -327,7 +327,7 @@
     }
 
     // =============================
-    // Combo Box Wijmo - Product 
+    // Combo Box Wijmo - Product
     // =============================
 
     function cboProductName(productList) {
@@ -450,7 +450,7 @@
     // =============================
 
     function createProblemTypeCboBox() {
-            cboProblemType = new wijmo.input.ComboBox('#problemTypeDiv', {
+        cboProblemType = new wijmo.input.ComboBox('#problemTypeDiv', {
             itemsSource: getProblemTypes(),
             placeholder: 'Select Problem',
             isEditable: false
@@ -463,7 +463,7 @@
     // =============================
 
     function createSeverityCboBox() {
-            cboSeverity = new wijmo.input.ComboBox('#severityDiv', {
+        cboSeverity = new wijmo.input.ComboBox('#severityDiv', {
             itemsSource: getSeverity(),
             placeholder: 'Select Severity',
             isEditable: false
@@ -476,7 +476,7 @@
     // =============================
 
     function createStatusCboBox() {
-            cboStatus = new wijmo.input.ComboBox('#statusDiv', {
+        cboStatus = new wijmo.input.ComboBox('#statusDiv', {
             itemsSource: getStatus(),
             placeholder: 'Select Status',
             isEditable: false
@@ -506,7 +506,7 @@
                             }
                         }
                         taskList.push({
-                            
+
                             Id: results[i]["Id"],
                             TaskNo: results[i]["TaskNo"],
                             TaskDate: results[i]["TaskDate"],
@@ -576,220 +576,220 @@
             itemsSource: staffList,
             isEditable: false
         });
-        }
+    }
 
-        // =========================
-        // TAsk Entry Validation
-        // =========================
-        function taskEntryValidation() {
-            var isValid = true;
-            $('.requiredField').each(function () {
-                if ($.trim($(this).val()) == '') {
-                    isValid = false;
-                    $(this).css({
-                        "border": "1px solid red"
-                    });
-                } else {
-                    $(this).css({
-                        "border": "",
-                    });
-                }
-            });
+    // =========================
+    // TAsk Entry Validation
+    // =========================
+    function taskEntryValidation() {
+        var isValid = true;
+        $('.requiredField').each(function () {
+            if ($.trim($(this).val()) == '') {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red"
+                });
+            } else {
+                $(this).css({
+                    "border": "",
+                });
+            }
+        });
 
-            return isValid;
-        }
+        return isValid;
+    }
 
-        // ============
-        // Add Task
-        // ============
-        function cmdAddTask() {
+    // ============
+    // Add Task
+    // ============
+    function cmdAddTask() {
         var taskObject = new Object();
         var taskSubObject = new Object();
 
-            taskObject.TaskDate = dateId;
-            taskObject.TaskNo = document.getElementById("taskNoDiv").value;
-            taskObject.ClientId = cboBoxClientName.selectedValue;
-            taskObject.ProductId = cboBoxProductName.selectedValue;
-            taskObject.Caller = document.getElementById("callerDiv").value;
-            taskObject.Concern = document.getElementById("concernDiv").value;
-            taskObject.AnsweredBy = cboStaffName.selectedValue;
-            taskObject.StaffId = cboAssignedStaffName.selectedValue;
-            taskObject.Remarks = document.getElementById("remarksDiv").value;
-            taskObject.ProblemType = cboProblemType.selectedItem;
-            taskObject.Severity = cboSeverity.selectedItem;
-            taskObject.Status = cboStatus.selectedItem;
-            taskObject.Solution = document.getElementById("solutionDiv").value;
-            taskObject.DoneDate = doneDate;
-            taskObject.DoneTime = doneTime;
-            taskObject.VerifiedBy = cboStaffVerified.selectedValue;
+        taskObject.TaskDate = dateId;
+        taskObject.TaskNo = document.getElementById("taskNoDiv").value;
+        taskObject.ClientId = cboBoxClientName.selectedValue;
+        taskObject.ProductId = cboBoxProductName.selectedValue;
+        taskObject.Caller = document.getElementById("callerDiv").value;
+        taskObject.Concern = document.getElementById("concernDiv").value;
+        taskObject.AnsweredBy = cboStaffName.selectedValue;
+        taskObject.StaffId = cboAssignedStaffName.selectedValue;
+        taskObject.Remarks = document.getElementById("remarksDiv").value;
+        taskObject.ProblemType = cboProblemType.selectedItem;
+        taskObject.Severity = cboSeverity.selectedItem;
+        taskObject.Status = cboStatus.selectedItem;
+        taskObject.Solution = document.getElementById("solutionDiv").value;
+        taskObject.DoneDate = doneDate;
+        taskObject.DoneTime = doneTime;
+        taskObject.VerifiedBy = cboStaffVerified.selectedValue;
 
-            var data = JSON.stringify(taskObject);
-          
+        var data = JSON.stringify(taskObject);
 
-            if (taskEntryValidation() == false) {
-                toastr.error("Fill out form");
-            } else {
-                $.ajax({
-                    url: '/api/task/add/',
-                    type: 'POST',
-                    data: data,
-                    contentType: "application/json;charset=utf-8",
-                    cache: false,
-                    statusCode: {
-                        200: function (id) {
-                            if (document.getElementById("actionDiv").value == "") {
-                                toastr.success("Saved");
-                                setTimeout(function () { window.location = "../Software/Task"; }, 1000);
-                            } else {
 
-                                taskSubObject.TaskId = id;
-                                taskSubObject.Action = document.getElementById("actionDiv").value;
-                                taskSubObject.DateCalled = dateCalled;
-                                taskSubObject.TimeCalled = timeCalled;
-                                taskSubObject.FinishedDate = finishedDate;
-                                taskSubObject.FinishedTime = finishedTime;
-                                taskSubObject.Remarks = document.getElementById("remarksDiv").value;
+        if (taskEntryValidation() == false) {
+            toastr.error("Fill out form");
+        } else {
+            $.ajax({
+                url: '/api/task/add/',
+                type: 'POST',
+                data: data,
+                contentType: "application/json;charset=utf-8",
+                cache: false,
+                statusCode: {
+                    200: function (id) {
+                        if (document.getElementById("actionDiv").value == "") {
+                            toastr.success("Saved");
+                            setTimeout(function () { window.location = "../Software/Task"; }, 1000);
+                        } else {
 
-                                var data2 = JSON.stringify(taskSubObject);
-                                $.ajax({
-                                    url: '/api/tasksub/add/',
-                                    type: 'POST',
-                                    data: data2,
-                                    contentType: "application/json;charset=utf-8",
-                                    cache: false,
-                                    statusCode: {
-                                        200: function () {
-                                            toastr.success("Saved");
-                                            setTimeout(function () { window.location = "../Software/Task"; }, 1000);
-                                        },
-                                        400: function () {
-                                            alert("Error");
-                                        },
-                                    }
-                                });
-                            }
-                        },
-                        400: function () {
-                            alert("Error");
-                        },
-                    }
-                });
+                            taskSubObject.TaskId = id;
+                            taskSubObject.Action = document.getElementById("actionDiv").value;
+                            taskSubObject.DateCalled = dateCalled;
+                            taskSubObject.TimeCalled = timeCalled;
+                            taskSubObject.FinishedDate = finishedDate;
+                            taskSubObject.FinishedTime = finishedTime;
+                            taskSubObject.Remarks = document.getElementById("remarksDiv").value;
 
-             
-            }
+                            var data2 = JSON.stringify(taskSubObject);
+                            $.ajax({
+                                url: '/api/tasksub/add/',
+                                type: 'POST',
+                                data: data2,
+                                contentType: "application/json;charset=utf-8",
+                                cache: false,
+                                statusCode: {
+                                    200: function () {
+                                        toastr.success("Saved");
+                                        setTimeout(function () { window.location = "../Software/Task"; }, 1000);
+                                    },
+                                    400: function () {
+                                        alert("Error");
+                                    },
+                                }
+                            });
+                        }
+                    },
+                    400: function () {
+                        alert("Error");
+                    },
+                }
+            });
+
+
         }
+    }
 
-        // ============
-        // On Page Load
-        // ============
-        $(document).ready(function () {
+    // ============
+    // On Page Load
+    // ============
+    $(document).ready(function () {
 
-            //TASK DATE
-            theDate = new Date();
-            inputDate = new wijmo.input.InputDate('#theInputDate', {
-                min: new Date(2014, 01, 01),
-                format: 'MM/dd/yyyy',
-                value: theDate,
-                disabled: true
-            });
+        //TASK DATE
+        theDate = new Date();
+        inputDate = new wijmo.input.InputDate('#theInputDate', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: theDate,
+            disabled: true
+        });
 
-            //DONE DATE
-            dDate = new Date();
-            // create InputDate control
-            iDate = new wijmo.input.InputDate('#doneDateDiv', {
-                min: new Date(2014, 01, 01),
-                format: 'MM/dd/yyyy',
-                value: dDate,
-                onValueChanged: function () {
-                    doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-                    
-                }
-            });
+        //DONE DATE
+        dDate = new Date();
+        // create InputDate control
+        iDate = new wijmo.input.InputDate('#doneDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: dDate,
+            onValueChanged: function () {
+                doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
 
-            doneDate = [iDate.value.getFullYear(), iDate.value.getMonth() + 1, iDate.value.getDate()].join('-');
+            }
+        });
 
-            // DONE TIME
-            inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
-                min: new Date(2014, 8, 1, 7, 0),
-                max: new Date(2014, 8, 1, 20, 0),
-                step: 1,
-                format: 'h:mm tt',
-                value: dDate,
-                onValueChanged: function () {
-                    doneTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
-                    console.log(doneTime);
-                }
-            });
+        doneDate = [iDate.value.getFullYear(), iDate.value.getMonth() + 1, iDate.value.getDate()].join('-');
 
-            doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
+        // DONE TIME
+        inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 1,
+            format: 'h:mm tt',
+            value: dDate,
+            onValueChanged: function () {
+                doneTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                console.log(doneTime);
+            }
+        });
 
-            //DATE CALLED
-            dCalled = new Date();
-            inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
-                min: new Date(2014, 01, 01),
-                format: 'MM/dd/yyyy',
-                value: dCalled,
-                onValueChanged: function () {
-                    dateCalled = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-                    console.log(dateCalled);
-                }
-            });
+        doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
 
-            dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
+        //DATE CALLED
+        dCalled = new Date();
+        inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: dCalled,
+            onValueChanged: function () {
+                dateCalled = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                console.log(dateCalled);
+            }
+        });
 
-            //TIME CALLED
-            var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
-                min: new Date(2014, 8, 1, 7, 0),
-                max: new Date(2014, 8, 1, 20, 0),
-                step: 15,
-                format: 'h:mm tt',
-                value: dCalled,
-                onValueChanged: function () {
-                    timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
-                    console.log(timeCalled);
-                }
-            });
+        dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
 
-            //FINISHED DATE
-            fDate = new Date();
-            inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
-                min: new Date(2014, 01, 01),
-                format: 'MM/dd/yyyy',
-                value: fDate,
-                onValueChanged: function () {
-                    finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-                    console.log(finishedDate);
-                }
-            });
+        //TIME CALLED
+        var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 15,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                console.log(timeCalled);
+            }
+        });
 
-            finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
+        //FINISHED DATE
+        fDate = new Date();
+        inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: fDate,
+            onValueChanged: function () {
+                finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                console.log(finishedDate);
+            }
+        });
+
+        finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
 
 
-            //FINISHED TIME
-            var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
-                min: new Date(2014, 8, 1, 7, 0),
-                max: new Date(2014, 8, 1, 20, 0),
-                step: 15,
-                format: 'h:mm tt',
-                value: dCalled,
-                onValueChanged: function () {
-                    finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
-                    console.log(finishedTime);
-                }
-            });
+        //FINISHED TIME
+        var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 15,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                console.log(finishedTime);
+            }
+        });
 
-         
-            getDate();
-            generateTaskNo();
-            getClientName();
-            getProduct();
-            getStaffName();
-            createProblemTypeCboBox();
-            createSeverityCboBox();
-            createStatusCboBox();
-           
 
-        })
+        getDate();
+        generateTaskNo();
+        getClientName();
+        getProduct();
+        getStaffName();
+        createProblemTypeCboBox();
+        createSeverityCboBox();
+        createStatusCboBox();
+
+
+    })
 </script>
 
 @Html.Partial("Footer")
