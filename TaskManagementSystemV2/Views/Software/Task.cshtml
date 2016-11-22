@@ -242,23 +242,29 @@
 
         theDate = new Date();
 
+        var isClicked = false;
+
         // create InputDate control
         inputDate = new wijmo.input.InputDate('#theInputDate', {
             min: new Date(2014, 8, 1),
             format: 'M/d/yyyy',
             value: theDate,
             onValueChanged: function () {
-                dateId = [this.value.getMonth() + 1, this.value.getDate(), this.value.getFullYear()].join('-');
-                console.log(dateId);
+                if (isClicked) {
+                    dateId = [this.value.getMonth() + 1, this.value.getDate(), this.value.getFullYear()].join('-');
+                    console.log(dateId);
 
-                taskList = new wijmo.collections.CollectionView(getTaskList());
+                    taskList = new wijmo.collections.CollectionView(getTaskList());
 
-                taskList.canFilter = true;
-                taskList.pageSize = 15;
+                    taskList.canFilter = true;
+                    taskList.pageSize = 15;
 
-                //Users - Flex Grid
-                userGrid.itemsSource = taskList;
-                userGrid.trackChanges = true;
+                    //Users - Flex Grid
+                    userGrid.itemsSource = taskList;
+                    userGrid.trackChanges = true;
+                } else {
+                    isClicked = true;
+                }
             }
         });
         dateId = [inputDate.value.getMonth() + 1, inputDate.value.getDate(), inputDate.value.getFullYear()].join('-');
@@ -276,6 +282,8 @@
         userGrid = new wijmo.grid.FlexGrid('#userCollectionGrid');
         userGrid.initialize({
             columns: [
+
+            
             {
                 "header": "View",
                 "binding": "EditId",
@@ -290,6 +298,14 @@
                 "align": "center",
                 "isContentHtml": true
 
+            },
+            {
+                "header": "Task No.",
+                "binding": "TaskNo",
+                "width": 70,
+                "align": "center",
+                "isContentHtml": true,
+                "width": "2*"
             },
             {
                 "header": "Client",

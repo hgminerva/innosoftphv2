@@ -815,11 +815,31 @@
                     getStaffName();
                 }
 
-
+                getClientName();
+                getProduct();
             }
         });
 
         return result;
+    }
+
+    // =============================
+    // Combo Box Wijmo - Client
+    // =============================
+
+    function cboClientName(clientList) {
+        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
+            placeholder: "Select Client",
+            displayMemberPath: "CompanyName",
+            selectedValuePath: "Id",
+            itemsSource: clientList,
+            disabled: true,
+            selectedValue: cboClientNameSelectedValue.toString()
+
+        });
+
+        cboBoxClientName.onSelectedIndexChanged = function () {
+        }
     }
 
     // ==================
@@ -851,25 +871,6 @@
         });
 
         return clientList;
-    }
-
-    // =============================
-    // Combo Box Wijmo - Client
-    // =============================
-
-    function cboClientName(clientList) {
-        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
-            placeholder: "Select Client",
-            displayMemberPath: "CompanyName",
-            selectedValuePath: "Id",
-            itemsSource: clientList,
-            disabled: true,
-            selectedValue: cboClientNameSelectedValue.toString()
-
-        });
-
-        cboBoxClientName.onSelectedIndexChanged = function () {
-        }
     }
 
     // ==================
@@ -1164,8 +1165,8 @@
     $(document).ready(function () {
 
         getTaskList();
-        getClientName();
-        getProduct();
+       
+        
         createProblemTypeCboBox();
         createSeverityCboBox();
         createStatusCboBox();
@@ -1183,8 +1184,7 @@
         taskSubGrid.initialize({
             columns: [
 
-
-            {
+           {
                 "header": "Edit",
                 "binding": "EditId",
                 "width": 70,
