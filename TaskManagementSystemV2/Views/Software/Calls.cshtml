@@ -20,87 +20,302 @@
             </ol>
         </section>
         <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!--table container-->
-                    <div class="box">
-                        <div class="row">
-                            <div class="box-header">
-                                <div class="btn-group-horizontal btn-sm pull-right">
-                                    <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
-                                    <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--table-->
-                        <div class="row">
-                            <ul class="nav nav-pills nav-stacked pill-custom col-md-4">
-                                <li class="active"><a href="#callsCustomer" data-toggle="pill">Calls Per Customer</a></li>
-                                <li><a class="" href="#callsProduct" data-toggle="pill">Calls Per Product</a></li>
-                                <li><a href="#callsStaffAss" data-toggle="pill">Calls Per Staff Assigned</a></li>
-                                <li><a href="#callsTypeStaff" data-toggle="pill">Calls Per Problem Type (Staff)</a></li>
-                                <li><a href="#callsTypeCust" data-toggle="pill">Calls Per Problem Type (Customer)</a></li>
-                                <li><a href="#callsMonth" data-toggle="pill">Calls Per Month</a></li>
-                                <li><a href="#callsSummary" data-toggle="pill">Call Summary</a></li>
-                                <li><a href="#callsDetail" data-toggle="pill">Call Detail</a></li>
-                                <li><a href="#callsStaffAct" data-toggle="pill">Call Per Staff Activity</a></li>
-                            </ul>
-                            <div class="tab-content col-md-8">
-                                <div class="tab-pane active" id="callsCustomer">
-                                    <h4 class="breadcrumb">Calls Per Customer</h4>
-                                    @*<div class="">*@
+            <!--table container-->
+            <div class="box">
+                <!--table-->
+                <div class="row">
+                    <ul class="nav nav-pills nav-stacked pill-custom col-md-4">
+                        <li class="active"><a href="#callsCustomer" data-toggle="pill">Calls Per Customer</a></li>
+                        <li><a class="" href="#callsProduct" data-toggle="pill">Calls Per Product</a></li>
+                        <li><a href="#callsStaffAss" data-toggle="pill">Calls Per Staff Assigned</a></li>
+                        <li><a href="#callsTypeStaff" data-toggle="pill">Calls Per Problem Type (Staff)</a></li>
+                        <li><a href="#callsTypeCust" data-toggle="pill">Calls Per Problem Type (Customer)</a></li>
+                        <li><a href="#callsMonth" data-toggle="pill">Calls Per Month</a></li>
+                        <li><a href="#callsSummary" data-toggle="pill">Call Summary</a></li>
+                        <li><a href="#callsDetail" data-toggle="pill">Call Detail</a></li>
+                    </ul>
+                    <div class="tab-content col-md-8">
+                        <div class="tab-pane active" id="callsCustomer">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label for="startDateDiv" class="col-sm-2 control-label">Start Date</label>
-                                            <div class="col-sm-9">
-                                                <div id="startDateDiv"></div>
-                                                <wj-calendar min="2014-8-1" value="startDate">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Customer</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallsPerCustomerStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallsPerCustomerEndDate"></div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="endDateDiv" class="col-sm-2 control-label">End Date</label>
-                                            <div class="col-sm-9">
-                                                <div id="endDateDiv"></div>
-                                                <wj-calendar min="2014-8-1" value="endDate">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Customer</label><br />
+                                                <div id="cboCallsPerCustomerCustomer"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    @*</div>*@
                                 </div>
-                                <div class="tab-pane" id="callsProduct">
-                                    <h4 class="breadcrumb">Calls Per Product</h4>
-
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsProduct">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Product</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsStaffAss">
-                                    <h4 class="breadcrumb">Calls Per Staff Assigned</h4>
-
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallsPerProductStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallsPerProductEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Product</label><br />
+                                                <div id="cboCallsPerProductProduct"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsTypeStaff">
-                                    <h4 class="breadcrumb">Calls Per Problem Type (Staff)</h4>
-
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsStaffAss">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Staff Assigned</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsTypeCust">
-                                    <h4 class="breadcrumb">Calls Per Problem Type (Customer)</h4>
-
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallsPerStaffStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallsPerStaffEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Staff</label><br />
+                                                <div id="cboCallsPerStaffStaff"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsMonth">
-                                    <h4 class="breadcrumb">Calls Per Month</h4>
-
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsTypeStaff">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Problem Type (Staff)</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsSummary">
-                                    <h4 class="breadcrumb">Call Summary</h4>
-
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallsPerProblemTypeStaffStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallsPerProblemTypeStaffEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Staff</label><br />
+                                                <div id="cboCallsPerProblemTypeStaffStaff"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsDetail">
-                                    <h4 class="breadcrumb">Call Detail</h4>
-
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsTypeCust">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Problem Type (Customer)</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="callsStaffAct">
-                                    <h4 class="breadcrumb">Call Per Staff Activity</h4>
-
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallsPerProblemTypeCustomerStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallsPerProblemTypeCustomerEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Customer</label><br />
+                                                <div id="cboCallsPerProblemTypeCustomerCustomer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div><!-- tab content -->
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsMonth">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Calls Per Month</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label>Month Year</label><br />
+                                        <div id="cboCallsPerMonthMonthYear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsSummary">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Call Summary</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallSummaryStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallSummaryEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Customer</label><br />
+                                                <div id="cboCallSummaryCustomer"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Staff</label><br />
+                                                <div id="cboCallSummaryStaff"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status</label><br />
+                                                <div id="cboCallSummaryStatus"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="callsDetail">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Call Detail</h4>
+                                        </div>
+                                        <div class="col-md-6" align="right">
+                                            <button class="btn btn-primary" id="" onclick=""><i class="fa fa-table"></i> View</button>
+                                            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label><br />
+                                                <div id="cboCallDetailStartDate"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label><br />
+                                                <div id="cboCallDetailEndDate"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Customer</label><br />
+                                                <div id="cboCallDetailCustomer"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product</label><br />
+                                                <div id="cboCallDetailProduct"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Staff</label><br />
+                                                <div id="cboCallDetailStaff"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,36 +327,717 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/software-js")
 <script type="text/javascript">
+    // global variables
+    var newDate = new Date();
+    var defaultDate = [newDate.getMonth() + 1, newDate.getDate(), newDate.getFullYear()].join('-');
+    var cboCallsPerCustomerStartDate;
+    var cboCallsPerCustomerEndDate;
+    var cboCallsPerCustomerStartDateDefaultValue = defaultDate;
+    var cboCallsPerCustomerEndDateDefaultValue = defaultDate;
+    var cboCallsPerCustomerCustomer;
+    var cboCallsPerProductStartDate;
+    var cboCallsPerProductEndDate;
+    var cboCallsPerProductStartDateDefaultValue = defaultDate;
+    var cboCallsPerProductEndDateDefaultValue = defaultDate;
+    var cboCallsPerProductProduct;
+    var cboCallsPerStaffStartDate;
+    var cboCallsPerStaffEndDate;
+    var cboCallsPerStaffStartDateDefaultValue = defaultDate;
+    var cboCallsPerStaffEndDateDefaultValue = defaultDate;
+    var cboCallsPerStaffStaff;
+    var cboCallsPerProblemTypeStaffStartDate;
+    var cboCallsPerProblemTypeStaffEndDate;
+    var cboCallsPerProblemTypeStaffStartDateDefaultValue = defaultDate;
+    var cboCallsPerProblemTypeStaffEndDateDefaultValue = defaultDate;
+    var cboCallsPerProblemTypeStaffStaff;
+    var cboCallsPerProblemTypeCustomerStartDate;
+    var cboCallsPerProblemTypeCustomerEndDate;
+    var cboCallsPerProblemTypeCustomerStartDateDefaultValue = defaultDate;
+    var cboCallsPerProblemTypeCustomerEndDateDefaultValue = defaultDate;
+    var cboCallsPerProblemTypeCustomerCustomer;
+    var cboCallSummaryStartDate;
+    var cboCallSummaryEndDate;
+    var cboCallSummaryStartDateDefaultValue = defaultDate;
+    var cboCallSummaryEndDateDefaultValue = defaultDate;
+    var cboCallSummaryCustomer;
+    var cboCallSummaryStaff;
+    var cboCallSummaryStatus;
+    var cboCallDetailStartDate;
+    var cboCallDetailEndDate;
+    var cboCallDetailStartDateDefaultValue = defaultDate;
+    var cboCallDetailEndDateDefaultValue = defaultDate;
+    var cboCallDetailCustomer;
+    var cboCallDetailProduct;
+    var cboCallDetailStaff;
 
-    // ============
-    // On Page Load
-    // ============
-
-    var inptStartDate;
-    var inptEndDate;
-
-    $(document).ready(function () {
-
-        //Start Date
-        startDate = new Date();
-        inptStartDate = new wijmo.input.InputDate('#startDateDiv', {
-            min: new Date(2014, 01, 01),
-            format: 'MM/dd/yyyy',
-            value: startDate,
-            disabled: false
+    // cbo start date calls per customer
+    function createCboCallsPerCustomerReportStartDate() {
+        cboCallsPerCustomerStartDate.dispose();
+        cboCallsPerCustomerStartDate = new wijmo.input.InputDate('#cboCallsPerCustomerStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerCustomerStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallsPerCustomerEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerCustomerStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerCustomerReportEndDate();
+                }, 50);
+            }
         });
+    }
 
-        //End Date
-        endDate = new Date();
-        inptStartDate = new wijmo.input.InputDate('#endDateDiv', {
-            min: new Date(2014, 01, 01),
-            format: 'MM/dd/yyyy',
-            value: endDate,
-            disabled: false
+    // cbo end date calls per customer
+    function createCboCallsPerCustomerReportEndDate() {
+        cboCallsPerCustomerEndDate.dispose();
+        cboCallsPerCustomerEndDate = new wijmo.input.InputDate('#cboCallsPerCustomerEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerCustomerEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallsPerCustomerStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerCustomerEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerCustomerReportStartDate();
+                }, 50);
+            }
         });
+    }
 
-    });
+    // create cbo for customer in calls per customer report
+    function createCboCallsPerCustomerCustomer() {
+        var customerArray = new Array();
+        $.ajax({
+            url: '/api/client/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (customerResults) {
+                var disabled = true;
+                if (customerResults.length > 0) {
+                    for (i = 0; i < customerResults.length; i++) {
+                        customerArray.push({
+                            Id: customerResults[i]["Id"],
+                            CompanyName: customerResults[i]["CompanyName"]
+                        });
+                    }
 
+                    disabled = false;
+                }
+
+                cboCallsPerCustomerCustomer.dispose();
+                cboCallsPerCustomerCustomer = new wijmo.input.ComboBox('#cboCallsPerCustomerCustomer', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: customerArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "CompanyName",
+                    selectedValuePath: "CompanyName",
+                });
+            }
+        });
+    }
+
+    // cbo start date calls per product
+    function createCboCallsPerProductReportStartDate() {
+        cboCallsPerProductStartDate.dispose();
+        cboCallsPerProductStartDate = new wijmo.input.InputDate('#cboCallsPerProductStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProductStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallsPerProductEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProductStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProductReportEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date calls per product
+    function createCboCallsPerProductReportEndDate() {
+        cboCallsPerProductEndDate.dispose();
+        cboCallsPerProductEndDate = new wijmo.input.InputDate('#cboCallsPerProductEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProductEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallsPerProductStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProductEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProductReportStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for product in calls per product report
+    function createCboCallsPerProductProduct() {
+        var productArray = new Array();
+        $.ajax({
+            url: '/api/product/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (productResults) {
+                var disabled = true;
+                if (productResults.length > 0) {
+                    for (i = 0; i < productResults.length; i++) {
+                        productArray.push({
+                            Id: productResults[i]["Id"],
+                            ProductDescription: productResults[i]["ProductDescription"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallsPerProductProduct.dispose();
+                cboCallsPerProductProduct = new wijmo.input.ComboBox('#cboCallsPerProductProduct', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: productArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "ProductDescription",
+                    selectedValuePath: "ProductDescription",
+                });
+            }
+        });
+    }
+
+    // cbo start date calls per staff
+    function createCboCallsPerStaffReportStartDate() {
+        cboCallsPerStaffStartDate.dispose();
+        cboCallsPerStaffStartDate = new wijmo.input.InputDate('#cboCallsPerStaffStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerStaffStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallsPerStaffEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerStaffStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerStaffReportEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date calls per staff
+    function createCboCallsPerStaffReportEndDate() {
+        cboCallsPerStaffEndDate.dispose();
+        cboCallsPerStaffEndDate = new wijmo.input.InputDate('#cboCallsPerStaffEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerStaffEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallsPerStaffStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerStaffEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerStaffReportStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for staff in calls per staff report
+    function createCboCallsPerStaffStaff() {
+        var staffArray = new Array();
+        $.ajax({
+            url: '/api/staff/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (staffResults) {
+                var disabled = true;
+                if (staffResults.length > 0) {
+                    for (i = 0; i < staffResults.length; i++) {
+                        staffArray.push({
+                            Id: staffResults[i]["Id"],
+                            StaffName: staffResults[i]["StaffName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallsPerStaffStaff.dispose();
+                cboCallsPerStaffStaff = new wijmo.input.ComboBox('#cboCallsPerStaffStaff', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: staffArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "StaffName",
+                    selectedValuePath: "StaffName",
+                });
+            }
+        });
+    }
+
+    // cbo start date calls per staff
+    function createCboCallsPerProblemTypeStaffReportStartDate() {
+        cboCallsPerProblemTypeStaffStartDate.dispose();
+        cboCallsPerProblemTypeStaffStartDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeStaffStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProblemTypeStaffStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallsPerProblemTypeStaffEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProblemTypeStaffStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProblemTypeStaffReportEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date calls per problem type staff
+    function createCboCallsPerProblemTypeStaffReportEndDate() {
+        cboCallsPerProblemTypeStaffEndDate.dispose();
+        cboCallsPerProblemTypeStaffEndDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeStaffEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProblemTypeStaffEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallsPerProblemTypeStaffStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProblemTypeStaffEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProblemTypeStaffReportStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for staff in calls per problem type staff report
+    function createCboCallsPerProblemTypeStaffStaff() {
+        var staffArray = new Array();
+        $.ajax({
+            url: '/api/staff/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (staffResults) {
+                var disabled = true;
+                if (staffResults.length > 0) {
+                    for (i = 0; i < staffResults.length; i++) {
+                        staffArray.push({
+                            Id: staffResults[i]["Id"],
+                            StaffName: staffResults[i]["StaffName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallsPerProblemTypeStaffStaff.dispose();
+                cboCallsPerProblemTypeStaffStaff = new wijmo.input.ComboBox('#cboCallsPerProblemTypeStaffStaff', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: staffArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "StaffName",
+                    selectedValuePath: "StaffName",
+                });
+            }
+        });
+    }
+
+    // cbo start date calls per problem type customer
+    function createCboCallsPerProblemTypeCustomerReportStartDate() {
+        cboCallsPerProblemTypeCustomerStartDate.dispose();
+        cboCallsPerProblemTypeCustomerStartDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeCustomerStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProblemTypeCustomerStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallsPerProblemTypeCustomerEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProblemTypeCustomerStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProblemTypeCustomerReportEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date calls per problem type customer
+    function createCboCallsPerProblemTypeCustomerReportEndDate() {
+        cboCallsPerProblemTypeCustomerEndDate.dispose();
+        cboCallsPerProblemTypeCustomerEndDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeCustomerEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallsPerProblemTypeCustomerEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallsPerProblemTypeCustomerStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallsPerProblemTypeCustomerEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallsPerProblemTypeCustomerReportStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for customer in calls per problem type customer report
+    function createCboCallsPerProblemTypeCustomerCustomer() {
+        var customerArray = new Array();
+        $.ajax({
+            url: '/api/client/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (customerResults) {
+                var disabled = true;
+                if (customerResults.length > 0) {
+                    for (i = 0; i < customerResults.length; i++) {
+                        customerArray.push({
+                            Id: customerResults[i]["Id"],
+                            CompanyName: customerResults[i]["CompanyName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallsPerProblemTypeCustomerCustomer.dispose();
+                cboCallsPerProblemTypeCustomerCustomer = new wijmo.input.ComboBox('#cboCallsPerProblemTypeCustomerCustomer', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: customerArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "CompanyName",
+                    selectedValuePath: "CompanyName",
+                });
+            }
+        });
+    }
+
+    // cbo start date call summary customer
+    function createCboCallSummaryStartDate() {
+        cboCallSummaryStartDate.dispose();
+        cboCallSummaryStartDate = new wijmo.input.InputDate('#cboCallSummaryStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallSummaryStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallSummaryEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallSummaryStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallSummaryEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date call summary customer
+    function createCboCallSummaryEndDate() {
+        cboCallSummaryEndDate.dispose();
+        cboCallSummaryEndDate = new wijmo.input.InputDate('#cboCallSummaryEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallSummaryEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallSummaryStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallSummaryEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallSummaryStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for customer in call summary customer report
+    function createCboCallSummaryCustomer() {
+        var customerArray = new Array();
+        $.ajax({
+            url: '/api/client/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (customerResults) {
+                var disabled = true;
+                if (customerResults.length > 0) {
+                    for (i = 0; i < customerResults.length; i++) {
+                        customerArray.push({
+                            Id: customerResults[i]["Id"],
+                            CompanyName: customerResults[i]["CompanyName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallSummaryCustomer.dispose();
+                cboCallSummaryCustomer = new wijmo.input.ComboBox('#cboCallSummaryCustomer', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: customerArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "CompanyName",
+                    selectedValuePath: "CompanyName",
+                });
+            }
+        });
+    }
+
+    // create cbo for staff in calls summary staff report
+    function createCboCallSummaryStaff() {
+        var staffArray = new Array();
+        $.ajax({
+            url: '/api/staff/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (staffResults) {
+                var disabled = true;
+                if (staffResults.length > 0) {
+                    for (i = 0; i < staffResults.length; i++) {
+                        staffArray.push({
+                            Id: staffResults[i]["Id"],
+                            StaffName: staffResults[i]["StaffName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallSummaryStaff.dispose();
+                cboCallSummaryStaff = new wijmo.input.ComboBox('#cboCallSummaryStaff', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: staffArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "StaffName",
+                    selectedValuePath: "StaffName",
+                });
+            }
+        });
+    }
+
+    function getStatus() {
+        return [
+            "Pending/On-going",
+            "Done",
+            "Cancelled",
+            "Waiting for Client"
+        ];
+    }
+
+    // create cbo for staff in calls summary status report
+    function createCboCallSummaryStatus() {
+        cboCallSummaryStatus = new wijmo.input.ComboBox('#cboCallSummaryStatus', {
+            placeholder: "Select",
+            itemsSource: getStatus(),
+            isEditable: false,
+        });
+    }
+
+    // cbo start date call detail customer
+    function createCboCallDetailStartDate() {
+        cboCallDetailStartDate.dispose();
+        cboCallDetailStartDate = new wijmo.input.InputDate('#cboCallDetailStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallDetailStartDateDefaultValue),
+            mask: '99-99-9999',
+            max: new Date(cboCallDetailEndDateDefaultValue),
+            onValueChanged: function () {
+                cboCallDetailStartDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallDetailEndDate();
+                }, 50);
+            }
+        });
+    }
+
+    // cbo end date call detail customer
+    function createCboCallDetailEndDate() {
+        cboCallDetailEndDate.dispose();
+        cboCallDetailEndDate = new wijmo.input.InputDate('#cboCallDetailEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(cboCallDetailEndDateDefaultValue),
+            mask: '99-99-9999',
+            min: new Date(cboCallDetailStartDateDefaultValue),
+            onValueChanged: function () {
+                cboCallDetailEndDateDefaultValue = this.value.toLocaleDateString();
+                setTimeout(function () {
+                    createCboCallDetailStartDate();
+                }, 50);
+            }
+        });
+    }
+
+    // create cbo for customer in call detail customer report
+    function createCboCallDetailCustomer() {
+        var customerArray = new Array();
+        $.ajax({
+            url: '/api/client/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (customerResults) {
+                var disabled = true;
+                if (customerResults.length > 0) {
+                    for (i = 0; i < customerResults.length; i++) {
+                        customerArray.push({
+                            Id: customerResults[i]["Id"],
+                            CompanyName: customerResults[i]["CompanyName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallDetailCustomer.dispose();
+                cboCallDetailCustomer = new wijmo.input.ComboBox('#cboCallDetailCustomer', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: customerArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "CompanyName",
+                    selectedValuePath: "CompanyName",
+                });
+            }
+        });
+    }
+
+    // create cbo for product in call detail product report
+    function createCboCallDetailProduct() {
+        var productArray = new Array();
+        $.ajax({
+            url: '/api/product/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (productResults) {
+                var disabled = true;
+                if (productResults.length > 0) {
+                    for (i = 0; i < productResults.length; i++) {
+                        productArray.push({
+                            Id: productResults[i]["Id"],
+                            ProductDescription: productResults[i]["ProductDescription"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallDetailProduct.dispose();
+                cboCallDetailProduct = new wijmo.input.ComboBox('#cboCallDetailProduct', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: productArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "ProductDescription",
+                    selectedValuePath: "ProductDescription",
+                });
+            }
+        });
+    }
+
+    // create cbo for staff in call detail staff report
+    function createCboCallDetailStaff() {
+        var staffArray = new Array();
+        $.ajax({
+            url: '/api/staff/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (staffResults) {
+                var disabled = true;
+                if (staffResults.length > 0) {
+                    for (i = 0; i < staffResults.length; i++) {
+                        staffArray.push({
+                            Id: staffResults[i]["Id"],
+                            StaffName: staffResults[i]["StaffName"]
+                        });
+                    }
+
+                    disabled = false;
+                }
+
+                cboCallDetailStaff.dispose();
+                cboCallDetailStaff = new wijmo.input.ComboBox('#cboCallDetailStaff', {
+                    disabled: disabled,
+                    placeholder: "Select",
+                    itemsSource: staffArray,
+                    isEditable: false,
+                    required: true,
+                    displayMemberPath: "StaffName",
+                    selectedValuePath: "StaffName",
+                });
+            }
+        });
+    }
+
+    // on load page
+    window.onload = function () {
+        cboCallsPerCustomerStartDate = new wijmo.input.InputDate('#cboCallsPerCustomerStartDate');
+        createCboCallsPerCustomerReportStartDate();
+        cboCallsPerCustomerEndDate = new wijmo.input.InputDate('#cboCallsPerCustomerEndDate');
+        createCboCallsPerCustomerReportEndDate();
+        cboCallsPerCustomerCustomer = new wijmo.input.ComboBox('#cboCallsPerCustomerCustomer');
+        createCboCallsPerCustomerCustomer();
+        cboCallsPerProductStartDate = new wijmo.input.InputDate('#cboCallsPerProductStartDate');
+        createCboCallsPerProductReportStartDate();
+        cboCallsPerProductEndDate = new wijmo.input.InputDate('#cboCallsPerProductEndDate');
+        createCboCallsPerProductReportEndDate();
+        cboCallsPerProductProduct = new wijmo.input.ComboBox('#cboCallsPerProductProduct');
+        createCboCallsPerProductProduct();
+        cboCallsPerStaffStartDate = new wijmo.input.InputDate('#cboCallsPerStaffStartDate');
+        createCboCallsPerStaffReportStartDate();
+        cboCallsPerStaffEndDate = new wijmo.input.InputDate('#cboCallsPerStaffEndDate');
+        createCboCallsPerStaffReportEndDate();
+        cboCallsPerStaffStaff = new wijmo.input.ComboBox('#cboCallsPerStaffStaff');
+        createCboCallsPerStaffStaff();
+        cboCallsPerProblemTypeStaffStartDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeStaffStartDate');
+        createCboCallsPerProblemTypeStaffReportStartDate();
+        cboCallsPerProblemTypeStaffEndDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeStaffEndDate');
+        createCboCallsPerProblemTypeStaffReportEndDate();
+        cboCallsPerProblemTypeStaffStaff = new wijmo.input.ComboBox('#cboCallsPerProblemTypeStaffStaff');
+        createCboCallsPerProblemTypeStaffStaff();
+        cboCallsPerProblemTypeCustomerStartDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeCustomerStartDate');
+        createCboCallsPerProblemTypeCustomerReportStartDate();
+        cboCallsPerProblemTypeCustomerEndDate = new wijmo.input.InputDate('#cboCallsPerProblemTypeCustomerEndDate');
+        createCboCallsPerProblemTypeCustomerReportEndDate();
+        cboCallsPerProblemTypeCustomerCustomer = new wijmo.input.ComboBox('#cboCallsPerProblemTypeCustomerCustomer');
+        createCboCallsPerProblemTypeCustomerCustomer();
+        cboCallSummaryStartDate = new wijmo.input.InputDate('#cboCallSummaryStartDate');
+        createCboCallSummaryStartDate();
+        cboCallSummaryEndDate = new wijmo.input.InputDate('#cboCallSummaryEndDate');
+        createCboCallSummaryEndDate();
+        cboCallSummaryCustomer = new wijmo.input.ComboBox('#cboCallSummaryCustomer');
+        createCboCallSummaryCustomer();
+        cboCallSummaryStaff = new wijmo.input.ComboBox('#cboCallSummaryStaff');
+        createCboCallSummaryStaff();
+        createCboCallSummaryStatus();
+        cboCallDetailStartDate = new wijmo.input.InputDate('#cboCallDetailStartDate');
+        createCboCallDetailStartDate();
+        cboCallDetailEndDate = new wijmo.input.InputDate('#cboCallDetailEndDate');
+        createCboCallDetailEndDate();
+        cboCallDetailCustomer = new wijmo.input.ComboBox('#cboCallDetailCustomer');
+        createCboCallDetailCustomer();
+        cboCallDetailProduct = new wijmo.input.ComboBox('#cboCallDetailProduct');
+        createCboCallDetailProduct();
+        cboCallDetailStaff = new wijmo.input.ComboBox('#cboCallDetailStaff');
+        createCboCallDetailStaff();
+    }
 </script>
 
 @Html.Partial("Footer")

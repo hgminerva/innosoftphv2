@@ -13,6 +13,19 @@ namespace TaskManagementSystemV2.Controllers
         // Easyfis data context
         private Data.TMSdbmlDataContext db = new Data.TMSdbmlDataContext();
 
+        // current user
+        public String getCurrentLoginUser()
+        {
+            String currentUserStaff = "";
+
+            var mstUser = from d in db.mstUsers where d.AspNetUserId == User.Identity.GetUserId() select d;
+            if (mstUser.Any())
+            {
+                currentUserStaff = mstUser.FirstOrDefault().mstStaff.StaffName;
+            }
+
+            return currentUserStaff;
+        }
         public ActionResult TaskDetailController(Int32 taskId)
         {
             // PDF settings
@@ -22,60 +35,54 @@ namespace TaskManagementSystemV2.Controllers
             document.SetMargins(30f, 30f, 30f, 30f);
             PdfWriter.GetInstance(document, workStream).CloseStream = false;
 
-            string imagepath = Server.MapPath("~/images/callTicketHeader.png");
-            Image logo = Image.GetInstance(imagepath);
-
-            logo.ScalePercent(70f);
-
             // Document Starts
             document.Open();
 
             // Fonts Customization
+            Font fontArial18Bold = FontFactory.GetFont("Arial", 18, Font.BOLD);
             Font fontArial17Bold = FontFactory.GetFont("Arial", 17, Font.BOLD);
+            Font fontArial15Bold = FontFactory.GetFont("Arial", 15, Font.BOLD, BaseColor.WHITE);
             Font fontArial12Bold = FontFactory.GetFont("Arial", 12, Font.BOLD);
             Font fontArial12 = FontFactory.GetFont("Arial", 12);
-            Font fontArial9 = FontFactory.GetFont("Arial", 9);
-            Font fontArial10Bold = FontFactory.GetFont("Arial", 10, Font.BOLD);
+            var headerColor = new BaseColor(17, 37, 64);
 
             // line
             Paragraph line = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
 
-            //Header
-            Paragraph header = new Paragraph("Innosoft Solution Inc.");
-            header.Alignment = Element.ALIGN_JUSTIFIED;
+            // image
+            string imagepath = Server.MapPath("~/images/innosoft.png");
+            Image logo = Image.GetInstance(imagepath);
+            logo.ScalePercent(14f);
+            PdfPCell imageCell = new PdfPCell(logo);
 
-            var tasks = from d in db.trnTasks
-                        where d.Id == taskId
-                        select d;
+            // header company title w/ logo image
+            PdfPTable headerCompanyTitle = new PdfPTable(2);
+            float[] headerCompanyTitleWithCells = new float[] { 8f, 92f };
+            headerCompanyTitle.SetWidths(headerCompanyTitleWithCells);
+            headerCompanyTitle.WidthPercentage = 100;
+            headerCompanyTitle.AddCell(new PdfPCell(imageCell) { HorizontalAlignment = 0, Rowspan = 3, Border = 0 });
+            headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Innosoft Solutions Incorporated", fontArial18Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Innosoft Bldg. Corner V. Rama Avenue & R. Duterte St. Guadalupe, Cebu City", fontArial12)) { HorizontalAlignment = 0, Border = 0 });
+            headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Contact No: (032) 263 2912 / 520 7245", fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 15f });
+            document.Add(headerCompanyTitle);
 
-            var taskNo = from t in db.trnTasks
-                         where t.TaskNo == tasks.FirstOrDefault().TaskNo
-                         select t;
+            // call ticket title
+            PdfPTable callTicketTitle = new PdfPTable(1);
+            float[] callTicketTitleWithCells = new float[] { 100f };
+            callTicketTitle.SetWidths(callTicketTitleWithCells);
+            callTicketTitle.WidthPercentage = 100;
+            callTicketTitle.AddCell(new PdfPCell(new Phrase("Call Ticket", fontArial15Bold)) { HorizontalAlignment = 1, Border = 1, PaddingTop = 3f, PaddingBottom = 7f, BackgroundColor = headerColor });
+            document.Add(callTicketTitle);
 
-            var staff = from s in db.mstStaffs
-                        where s.Id == tasks.FirstOrDefault().StaffId
-                        select s;
-
-            var verifiedBy = from v in db.mstStaffs
-                             where v.Id == tasks.FirstOrDefault().VerifiedBy
-                             select v;
-
-            var action = from a in db.trnTaskSubs
-                         where a.TaskId == taskId
-                         select a;
-
-            var product = from p in db.mstProducts
-                          where p.Id == tasks.FirstOrDefault().ProductId
-                          select p;
-
-            var client = from c in db.mstClients
-                         where c.Id == tasks.FirstOrDefault().ClientId
-                         select c;
-           
-
-            var tasksub = from task in db.trnTaskSubs
-                          where task.TaskId == taskId
-
+            // queries
+            var tasks = from d in db.trnTasks where d.Id == taskId select d;
+            var taskNo = from t in db.trnTasks where t.TaskNo == tasks.FirstOrDefault().TaskNo select t;
+            var staff = from s in db.mstStaffs where s.Id == tasks.FirstOrDefault().StaffId select s;
+            var verifiedBy = from v in db.mstStaffs where v.Id == tasks.FirstOrDefault().VerifiedBy select v;
+            var action = from a in db.trnTaskSubs where a.TaskId == taskId select a;
+            var product = from p in db.mstProducts where p.Id == tasks.FirstOrDefault().ProductId select p;
+            var client = from c in db.mstClients where c.Id == tasks.FirstOrDefault().ClientId select c;
+            var tasksub = from task in db.trnTaskSubs where task.TaskId == taskId
                           select new Models.MstTaskSub
                           {
                               Id = task.Id,
@@ -88,163 +95,92 @@ namespace TaskManagementSystemV2.Controllers
                               Remarks = task.Remarks
                           };
 
-            //tableHeaderPage.AddCell(new PdfPCell(new Phrase("Printed " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToString("hh:mm:ss tt"), fontArial11)) { Border = 0, PaddingTop = 5f, HorizontalAlignment = 2 });
-            PdfPTable table = new PdfPTable(4);
-            table.DefaultCell.Border = Rectangle.NO_BORDER;
-            float[] widthsCellsheaderPage2 = new float[] { 35f, 100f, 40f, 100f };
+            // call ticket data
+            PdfPTable callTicketData = new PdfPTable(4);
+            float[] callTicketDataWithCells = new float[] { 35f, 100f, 40f, 100f };
+            callTicketData.SetWidths(callTicketDataWithCells);
+            callTicketData.WidthPercentage = 100;
+            callTicketData.AddCell(new PdfPCell(new Phrase("Date:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f, PaddingTop = 13f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().TaskDate.ToShortDateString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f, PaddingTop = 13f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Problem/Concern:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingTop = 13f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("", fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 15f, PaddingTop = 13f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Task/Ticket No:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().TaskNo.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().Concern.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, Rowspan = 3, Colspan = 2 });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Customer:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(client.FirstOrDefault().CompanyName.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Product:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(product.FirstOrDefault().ProductDescription.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Called By:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().Caller.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Problem Type:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().ProblemType.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Assigned To:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 20f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(staff.FirstOrDefault().StaffName.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 20f });
+            callTicketData.AddCell(new PdfPCell(new Phrase("Severity:", fontArial12Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 20f });
+            callTicketData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().Severity.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 20f });
+            document.Add(callTicketData);
 
-            table.SetWidths(widthsCellsheaderPage2);
-            table.WidthPercentage = 100;
-            PdfPCell cellTicket = new PdfPCell(new Phrase("Call Ticket", fontArial17Bold)) { HorizontalAlignment = 2 };
-            PdfPCell blank = new PdfPCell(new Phrase(" ")) { HorizontalAlignment = 2 };
-            cellTicket.Colspan = 4;
-            cellTicket.BorderColor = BaseColor.WHITE;
-            cellTicket.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
+            document.Add(line);
 
-            blank.Colspan = 4;
-            blank.BorderColor = BaseColor.WHITE;
-            blank.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
+            // action title
+            PdfPTable actionTitle = new PdfPTable(1);
+            float[] actionTitleWithCells = new float[] { 100f };
+            actionTitle.SetWidths(actionTitleWithCells);
+            actionTitle.WidthPercentage = 100;
+            actionTitle.AddCell(new PdfPCell(new Phrase("Action", fontArial15Bold)) { HorizontalAlignment = 1, Border = 0, PaddingTop = 3f, PaddingBottom = 7f, BackgroundColor = headerColor });
+            document.Add(actionTitle);
 
-            table.AddCell(cellTicket);
-            table.AddCell(blank);
-            table.AddCell(new Phrase("Date:", fontArial12Bold));
-            table.AddCell(tasks.FirstOrDefault().TaskDate.ToShortDateString());
-            table.AddCell(new Phrase("Problem/Concern:", fontArial12Bold));
-            table.AddCell(" ");
+            document.Add(line);
 
+            // action ticket data
+            PdfPTable actionData = new PdfPTable(2);
+            float[] actionDataWithCells = new float[] { 15f, 85f };
+            actionData.SetWidths(actionDataWithCells);
+            actionData.WidthPercentage = 100;
+            actionData.AddCell(new PdfPCell(new Phrase("Date", fontArial12Bold)) { HorizontalAlignment = 1, PaddingBottom = 5f, BackgroundColor = BaseColor.LIGHT_GRAY });
+            actionData.AddCell(new PdfPCell(new Phrase("Particulars / Actions", fontArial12Bold)) { HorizontalAlignment = 1, PaddingBottom = 5f, BackgroundColor = BaseColor.LIGHT_GRAY });
 
-
-            table.AddCell(new Phrase("Task/Ticket No.:", fontArial12Bold));
-            table.AddCell(tasks.FirstOrDefault().TaskNo.ToString());
-
-            PdfPCell problemRowCell = new PdfPCell(new Phrase(tasks.FirstOrDefault().Concern.ToString()));
-            problemRowCell.Rowspan = 3;
-            problemRowCell.Colspan = 2;
-            problemRowCell.BorderColor = BaseColor.WHITE;
-            table.AddCell(problemRowCell);
-
-
-            table.AddCell(new Phrase("Customer:", fontArial12Bold));
-            table.AddCell(client.FirstOrDefault().CompanyName.ToString());
-
-            table.AddCell(new Phrase("Product:", fontArial12Bold));
-            table.AddCell(product.FirstOrDefault().ProductDescription.ToString());
-
-            table.AddCell(new Phrase("Called By:", fontArial12Bold));
-            table.AddCell(tasks.FirstOrDefault().Caller.ToString());
-
-            table.AddCell(new Phrase("Problem Type:", fontArial12Bold));
-            table.AddCell(tasks.FirstOrDefault().ProblemType.ToString());
-
-            table.AddCell(new Phrase("Assigned To:", fontArial12Bold));
-            table.AddCell(staff.FirstOrDefault().StaffName.ToString());
-
-            table.AddCell(new Phrase("Severity:", fontArial12Bold));
-            table.AddCell(tasks.FirstOrDefault().Severity.ToString());
-           
-
-            PdfPTable actionTable = new PdfPTable(2);
-            float[] widthsCellsheaderPage3 = new float[] { 40f, 300f };
-            actionTable.SetWidths(widthsCellsheaderPage3);
-            //actionTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            actionTable.WidthPercentage = 100;
-
-            PdfPCell actionCell = new PdfPCell(new Phrase("Action", fontArial17Bold)) { HorizontalAlignment = 2 };
-            actionCell.Colspan = 2;
-            //actionCell.BorderColor = BaseColor.WHITE;
-            actionCell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            actionTable.AddCell(actionCell);
-
-
-            PdfPCell actionCellDate= new PdfPCell(new Phrase("Date", fontArial12Bold)) { HorizontalAlignment = 2 };
-            //actionCell.Colspan = 1;
-            //actionCell.BorderColor = BaseColor.WHITE;
-            actionCellDate.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            actionTable.AddCell(actionCellDate);
-
-            PdfPCell actionCellAction = new PdfPCell(new Phrase("Particulars/Action", fontArial12Bold)) { HorizontalAlignment = 2 };
-            //actionCell.Colspan = 1;
-            //actionCell.BorderColor = BaseColor.WHITE;
-            actionCellAction.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            actionTable.AddCell(actionCellAction);
-            
-            if (tasksub.Any()) {
+            if (tasksub.Any())
+            {
                 foreach (var taskSub in tasksub)
-                            {
-                    string ver = taskSub.DateCalled.ToString();
-                                string[] v = ver.Split(' ');
-
-                                PdfPCell date = new PdfPCell(new Phrase(v[0])) { HorizontalAlignment = 2 };
-                                //actionCell.Colspan = 1;
-                                actionCell.BorderColor = BaseColor.WHITE;
-                                date.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-                                actionTable.AddCell(date);
-
-                                //actionTable.AddCell() { HorizontalAlignment = 0 };
-                                actionTable.AddCell(taskSub.Action);
+                {
+                    actionData.AddCell(new PdfPCell(new Phrase(Convert.ToDateTime(taskSub.DateCalled).ToShortDateString(), fontArial12)) { HorizontalAlignment = 0, PaddingBottom = 3f, PaddingLeft = 5f });
+                    actionData.AddCell(new PdfPCell(new Phrase(taskSub.Action, fontArial12)) { HorizontalAlignment = 0, PaddingBottom = 5f, PaddingLeft = 5f });
                 }
             }
 
-            PdfPCell space = new PdfPCell(new Phrase(" "));
-            space.Colspan = 2;
-            space.BorderColor = BaseColor.WHITE;
-            space.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            actionTable.AddCell(space);
-            
-           
-            //Remarks
-            PdfPTable remarksTable = new PdfPTable(4);
-            float[] widthsCellsheaderPage4 = new float[] { 25f, 100f, 25f, 100f };
-            remarksTable.SetWidths(widthsCellsheaderPage4);
-            //actionTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            remarksTable.WidthPercentage = 100;
+            document.Add(actionData);
 
-            PdfPCell rLabel = new PdfPCell(new Phrase("Remarks:" , fontArial12Bold));
-            rLabel.Colspan = 4;
-            rLabel.BorderColor = BaseColor.WHITE;
-            rLabel.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(rLabel);
+            // remarks
+            PdfPTable remarksData = new PdfPTable(1);
+            float[] remarksDataWithCells = new float[] { 100f };
+            remarksData.SetWidths(remarksDataWithCells);
+            remarksData.WidthPercentage = 100;
+            remarksData.AddCell(new PdfPCell(new Phrase("Remarks", fontArial12Bold)) { HorizontalAlignment = 0, PaddingTop = 15f, PaddingBottom = 5f, Border = 0 });
+            remarksData.AddCell(new PdfPCell(new Phrase(tasks.FirstOrDefault().Remarks.ToString(), fontArial12)) { HorizontalAlignment = 0, Border = 0 });
+            document.Add(remarksData);
 
-            
-            PdfPCell remarks = new PdfPCell(new Phrase(tasks.FirstOrDefault().Remarks.ToString())) { HorizontalAlignment = 0 };
-            remarks.Colspan = 4;
-            remarks.BorderColor = BaseColor.WHITE;
-            remarks.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(remarks);
-
-            PdfPCell remarksSpace = new PdfPCell(new Phrase(" ")) { HorizontalAlignment = 0 };
-            remarksSpace.Colspan = 4;
-            remarksSpace.BorderColor = BaseColor.WHITE;
-            remarksSpace.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(remarksSpace);
-
-            PdfPCell preparedBy = new PdfPCell(new Phrase("Prepared By: _________________________________________", fontArial12Bold)) { HorizontalAlignment = 0 };
-            preparedBy.Colspan = 2;
-            preparedBy.BorderColor = BaseColor.WHITE;
-            preparedBy.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(preparedBy);
-
-            PdfPCell verifiedL = new PdfPCell(new Phrase("Verified By:", fontArial12Bold)) { HorizontalAlignment = 0 };
-            verifiedL.Colspan = 1;
-            verifiedL.BorderColor = BaseColor.WHITE;
-            verifiedL.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(verifiedL);
-            
-            PdfPCell verified = new PdfPCell(new Phrase(verifiedBy.FirstOrDefault().StaffName)) { HorizontalAlignment = 0 };
-            verified.Colspan = 1;
-            verified.BorderColor = BaseColor.WHITE;
-            verified.HorizontalAlignment = 0; //0=Left, 1=Centre, 2=Right
-            remarksTable.AddCell(verified);
-
-            document.Add(logo);
-            //document.Add(header);
-            document.Add(line);
-            //document.Add(Chunk.NEWLINE);
-            document.Add(table);
             document.Add(Chunk.NEWLINE);
-            document.Add(actionTable);
-            document.Add(remarksTable);
 
+            // Table for Footer
+            PdfPTable tableFooter = new PdfPTable(4);
+            tableFooter.WidthPercentage = 100;
+            float[] widthsCells2 = new float[] { 25f, 5f, 25f, 45f };
+            tableFooter.SetWidths(widthsCells2);
+            tableFooter.AddCell(new PdfPCell(new Phrase("Prepared by:", fontArial12Bold)) { Border = 0, HorizontalAlignment = 0 });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0 });
+            tableFooter.AddCell(new PdfPCell(new Phrase("Verified by:", fontArial12Bold)) { Border = 0, HorizontalAlignment = 0 });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0 });
+            tableFooter.AddCell(new PdfPCell(new Phrase(getCurrentLoginUser().ToUpper(), fontArial12)) { Border = 0, PaddingTop = 40f, PaddingBottom = 10f, HorizontalAlignment = 1 });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0, PaddingTop = 40f, PaddingBottom = 10f });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0, PaddingTop = 40f, PaddingBottom = 10f });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0 });
+            tableFooter.AddCell(new PdfPCell(new Phrase("Signature Over Printed Name")) { Border = 1, HorizontalAlignment = 1, PaddingBottom = 5f });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0, PaddingBottom = 5f });
+            tableFooter.AddCell(new PdfPCell(new Phrase("Signature Over Printed Name")) { Border = 1, HorizontalAlignment = 1, PaddingBottom = 5f });
+            tableFooter.AddCell(new PdfPCell(new Phrase(" ")) { Border = 0 });
+            document.Add(tableFooter);
 
             // Document End
             document.Close();
