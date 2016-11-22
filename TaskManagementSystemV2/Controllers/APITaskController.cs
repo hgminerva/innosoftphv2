@@ -27,6 +27,7 @@ namespace TaskManagementSystemV2.Controllers
                            TaskNo = d.TaskNo,
                            TaskDate = d.TaskDate.ToShortDateString(),
                            ClientId = d.ClientId,
+                           CompanyName = (from s in db.mstClients where s.Id == d.ClientId select s).FirstOrDefault().CompanyName,
                            Caller = d.Caller,
                            Concern = d.Concern,
                            AnsweredBy = d.AnsweredBy,

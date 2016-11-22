@@ -117,6 +117,7 @@
                             TaskNo: results[i]["TaskNo"],
                             TaskDate: results[i]["TaskDate"],
                             ClientId: name,
+                            CompanyName: results[i]["CompanyName"],
                             Status: results[i]["Status"],
                             ProductId: results[i]["ProductId"],
                             ProductCode: results[i]["ProductCode"],
@@ -309,7 +310,7 @@
             },
             {
                 "header": "Client",
-                "binding": "ClientId",
+                "binding": "CompanyName",
                 "align": "center",
                 "allowSorting": true,
                 "width": "3*"
