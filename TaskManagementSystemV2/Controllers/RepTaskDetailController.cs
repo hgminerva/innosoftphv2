@@ -61,7 +61,7 @@ namespace TaskManagementSystemV2.Controllers
             headerCompanyTitle.SetWidths(headerCompanyTitleWithCells);
             headerCompanyTitle.WidthPercentage = 100;
             headerCompanyTitle.AddCell(new PdfPCell(imageCell) { HorizontalAlignment = 0, Rowspan = 3, Border = 0 });
-            headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Innosoft Solutions Incorporated", fontArial18Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
+            headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Cebu Innosoft Solutions Incorporated", fontArial18Bold)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 3f });
             headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Innosoft Bldg. Corner V. Rama Avenue & R. Duterte St. Guadalupe, Cebu City", fontArial12)) { HorizontalAlignment = 0, Border = 0 });
             headerCompanyTitle.AddCell(new PdfPCell(new Phrase("Contact No: (032) 263 2912 / 520 7245", fontArial12)) { HorizontalAlignment = 0, Border = 0, PaddingBottom = 15f });
             document.Add(headerCompanyTitle);
