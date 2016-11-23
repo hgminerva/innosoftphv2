@@ -126,7 +126,7 @@ namespace TaskManagementSystemV2.Controllers
                 newItem.AnsweredBy = item.AnsweredBy;
                 newItem.StaffId = item.StaffId;
                 newItem.ProductId = item.ProductId;
-                newItem.Remarks = item.Remarks != null ? item.Remarks: "00000"; 
+                newItem.Remarks = item.Remarks != null ? item.Remarks : "00000";
                 newItem.Status = item.Status != null ? item.Status : "00000";
                 newItem.ProblemType = item.ProblemType != null ? item.ProblemType : "00000";
                 newItem.Severity = item.Severity != null ? item.Severity : "00000";
@@ -167,7 +167,7 @@ namespace TaskManagementSystemV2.Controllers
             {
                 var isLocked = true;
                 var identityUserId = User.Identity.GetUserId();
-               
+
                 var date = DateTime.Now;
 
                 var taskId = Convert.ToInt32(id);
@@ -221,9 +221,9 @@ namespace TaskManagementSystemV2.Controllers
                 var taskId = Convert.ToInt32(id);
                 var tasks = from d in db.trnTasks where d.Id == taskId select d;
                 var tasksub = from t in db.trnTaskSubs where t.TaskId == taskId select t;
-                
-              
-               if (tasks.Any())
+
+
+                if (tasks.Any())
                 {
                     db.trnTasks.DeleteOnSubmit(tasks.First());
                     db.SubmitChanges();
@@ -240,6 +240,41 @@ namespace TaskManagementSystemV2.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+        }
+
+        // list item by start date and end date
+        [HttpGet]
+        [Route("api/task/listByRangedDate/{startDate}/{endDate}")]
+        public List<Models.MstTask> getTaskListByRangedDate(String startDate, String endDate)
+        {
+            var task = from d in db.trnTasks
+                       where d.TaskDate >= Convert.ToDateTime(startDate)
+                       && d.TaskDate <= Convert.ToDateTime(endDate)
+                       select new Models.MstTask
+                       {
+                           Id = d.Id,
+                           TaskNo = d.TaskNo,
+                           TaskDate = d.TaskDate.ToShortDateString(),
+                           ClientId = d.ClientId,
+                           CompanyName = (from s in db.mstClients where s.Id == d.ClientId select s).FirstOrDefault().CompanyName,
+                           Caller = d.Caller,
+                           Concern = d.Concern,
+                           AnsweredBy = d.AnsweredBy,
+                           StaffId = d.StaffId,
+                           ProductId = d.ProductId,
+                           ProductCode = d.mstProduct.ProductCode,
+                           Remarks = d.Remarks,
+                           Status = d.Status,
+                           ProblemType = d.ProblemType,
+                           Severity = d.Severity,
+                           Solution = d.Solution,
+                           DoneDate = d.DoneDate.ToString(),
+                           DoneTime = d.DoneTime.ToString(),
+                           VerifiedBy = d.VerifiedBy,
+                           IsLocked = d.IsLocked
+                       };
+
+            return task.ToList();
         }
     }
 }
