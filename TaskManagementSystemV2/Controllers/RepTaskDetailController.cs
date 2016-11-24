@@ -87,11 +87,11 @@ namespace TaskManagementSystemV2.Controllers
                           {
                               Id = task.Id,
                               TaskId = task.TaskId,
-                              DateCalled = task.DateCalled,
+                              DateCalled = Convert.ToDateTime(task.DateCalled).ToShortDateString(),
                               Action = task.Action,
-                              TimeCalled = task.TimeCalled,
-                              FinishedDate = task.FinishedDate,
-                              FinishedTime = task.FinishedTime,
+                              TimeCalled = Convert.ToDateTime(task.TimeCalled).ToShortDateString(),
+                              FinishedDate = Convert.ToDateTime(task.FinishedDate).ToShortDateString(),
+                              FinishedTime = Convert.ToDateTime(task.FinishedTime).ToShortDateString(),
                               Remarks = task.Remarks
                           };
 

@@ -16,10 +16,13 @@ namespace TaskManagementSystemV2.Models
         public String CompanyName { get; set; }
         public String Caller { get; set; }
         public String Concern { get; set; }
-        public Int32 AnsweredBy  { get; set; }
+        public Int32 AnsweredBy { get; set; }
+        public String AnsweredByString { get; set; }
         public Int32 StaffId { get; set; }
+        public String Staff { get; set; }
         public Int32 ProductId { get; set; }
         public String ProductCode { get; set; }
+        public String Product { get; set; }
         public String Remarks { get; set; }
         public String Status { get; set; }
         public String ProblemType { get; set; }
@@ -28,6 +31,7 @@ namespace TaskManagementSystemV2.Models
         public String DoneDate { get; set; }
         public String DoneTime { get; set; }
         public Int32? VerifiedBy { get; set; }
+        public String VerifiedByString { get; set; }
         public Boolean IsLocked { get; set; }
-}
+    }
 }

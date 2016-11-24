@@ -25,11 +25,11 @@ namespace TaskManagementSystemV2.Controllers
                           {
                               Id = d.Id,
                               TaskId = d.TaskId,
-                              DateCalled = d.DateCalled,
+                              DateCalled = Convert.ToDateTime(d.DateCalled).ToShortDateString(),
                               Action = d.Action,
-                              TimeCalled = d.TimeCalled,
-                              FinishedDate = d.FinishedDate,
-                              FinishedTime = d.FinishedTime,
+                              TimeCalled = Convert.ToDateTime(d.TimeCalled).ToShortDateString(),
+                              FinishedDate = Convert.ToDateTime(d.FinishedDate).ToShortDateString(),
+                              FinishedTime = Convert.ToDateTime(d.FinishedTime).ToShortDateString(),
                               Remarks = d.Remarks
                           };
 
@@ -109,10 +109,10 @@ namespace TaskManagementSystemV2.Controllers
 
                     updateItem.TaskId = task.TaskId;
                     updateItem.Action = task.Action;
-                    updateItem.DateCalled = task.DateCalled;
-                    updateItem.TimeCalled = task.TimeCalled;
-                    updateItem.FinishedDate = task.FinishedDate;
-                    updateItem.FinishedTime = task.FinishedTime;
+                    updateItem.DateCalled = Convert.ToDateTime(task.DateCalled);
+                    updateItem.TimeCalled = Convert.ToDateTime(task.TimeCalled);
+                    updateItem.FinishedDate = Convert.ToDateTime(task.FinishedDate);
+                    updateItem.FinishedTime = Convert.ToDateTime(task.FinishedTime);
                     updateItem.Remarks = task.Remarks;
 
                     db.SubmitChanges();
@@ -159,6 +159,52 @@ namespace TaskManagementSystemV2.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+        }
+
+        // list task sub by date ranged
+        [Route("api/tasksub/listByDateRanged/{startDate}/{endDate}")]
+        [HttpGet]
+        public List<Models.MstTaskSub> listTaskSubByDateRanged(String startDate, String endDate)
+        {
+
+            var tasksub = from d in db.trnTaskSubs
+                          where d.trnTask.TaskDate >= Convert.ToDateTime(startDate)
+                          && d.trnTask.TaskDate <= Convert.ToDateTime(endDate)
+                          select new Models.MstTaskSub
+                          {
+                              Id = d.Id,
+                              TaskId = d.TaskId,
+                              DateCalled = Convert.ToDateTime(d.DateCalled).ToShortDateString(),
+                              Action = d.Action,
+                              TimeCalled = Convert.ToDateTime(d.TimeCalled).ToShortDateString(),
+                              FinishedDate = Convert.ToDateTime(d.FinishedDate).ToShortDateString(),
+                              FinishedTime = Convert.ToDateTime(d.FinishedTime).ToShortDateString(),
+                              Remarks = d.Remarks,
+                              TaskNo = d.trnTask.TaskNo,
+                              TaskDate = d.trnTask.TaskDate.ToShortDateString(),
+                              ClientId = d.trnTask.ClientId,
+                              CompanyName = (from s in db.mstClients where s.Id == d.trnTask.ClientId select s).FirstOrDefault().CompanyName,
+                              Caller = d.trnTask.Caller,
+                              Concern = d.trnTask.Concern,
+                              AnsweredBy = d.trnTask.AnsweredBy,
+                              AnsweredByString = (from a in db.mstStaffs where a.Id == d.trnTask.AnsweredBy select a).FirstOrDefault().StaffName,
+                              StaffId = d.trnTask.StaffId,
+                              Staff = (from s in db.mstStaffs where s.Id == d.trnTask.StaffId select s).FirstOrDefault().StaffName,
+                              ProductId = d.trnTask.ProductId,
+                              ProductCode = d.trnTask.mstProduct.ProductCode,
+                              Product = d.trnTask.mstProduct.ProductDescription,
+                              TaskRemarks = d.trnTask.Remarks,
+                              Status = d.trnTask.Status,
+                              ProblemType = d.trnTask.ProblemType,
+                              Severity = d.trnTask.Severity,
+                              Solution = d.trnTask.Solution,
+                              DoneDate = Convert.ToDateTime(d.trnTask.DoneDate).ToShortDateString(),
+                              DoneTime = Convert.ToDateTime(d.trnTask.DoneTime).ToShortDateString(),
+                              VerifiedBy = d.trnTask.VerifiedBy,
+                              IsLocked = d.trnTask.IsLocked,
+                          };
+
+            return tasksub.ToList();
         }
     }
 }

@@ -25,7 +25,7 @@
             <div class="box">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#taskSummary" id="taskSummaryTabId">Task Summary</a></li>
-                    <li><a data-toggle="tab" href="#taskDetail">Task Detail</a></li>
+                    <li><a data-toggle="tab" href="#taskDetail" id="taskDetailTabId">Task Detail</a></li>
                 </ul>
                 <br />
                 <div class="tab-content">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4" align="right">
-                                        <button class="btn btn-primary"><i class="fa fa-file-excel-o fa-fw"></i> CSV</button>
+                                        <button class="btn btn-primary" onclick="btnTaskSummaryReportCSVOnclick()"><i class="fa fa-file-excel-o fa-fw"></i> CSV</button>
                                         <a href="/Software" class="btn btn-danger"><i class="fa fa-close fa-fw"></i> Close</a>
                                     </div>
                                 </div>
@@ -92,13 +92,32 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4" align="right">
-                                        <button class="btn btn-primary"><i class="fa fa-file-excel-o fa-fw"></i> CSV</button>
+                                        <button class="btn btn-primary" onclick="btnTaskDetailReportCSVOnclick()"><i class="fa fa-file-excel-o fa-fw"></i> CSV</button>
                                         <a href="/Software" class="btn btn-danger"><i class="fa fa-close fa-fw"></i> Close</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <div id="taskDetailFlexGrid" class="grid"></div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="btn-group col-md-7" id="navigationPageGridTaskDetail">
+                                        <button type="button" class="btn btn-default border-custom" id="btnMoveToFirstPageGridTaskDetail">
+                                            <span class="glyphicon glyphicon-fast-backward"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default border-custom" id="btnMoveToPreviousPageGridTaskDetail">
+                                            <span class="glyphicon glyphicon-step-backward"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default border-custom" disabled style="width: 100px" id="btnCurrentPageGridTaskDetail"></button>
+                                        <button type="button" class="btn btn-default border-custom" id="btnMoveToNextPageGridTaskDetail">
+                                            <span class="glyphicon glyphicon-step-forward"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default border-custom" id="btnMoveToLastPageGridTaskDetail">
+                                            <span class="glyphicon glyphicon-fast-forward"></span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,16 +158,20 @@
 
     var taskSummaryCollectionView;
     var taskSummaryFlexGrid;
-
     var btnFirstPageGridTaskSummary;
     var btnPreviousPageGridTaskSummary;
     var btnNextPageGridTaskSummary;
     var btnLastPageGridTaskSummary;
     var btnCurrentPageGridTaskSummary;
 
-
     var taskDetailCollectionView;
     var taskDetailFlexGrid;
+    var btnFirstPageGridTaskDetail;
+    var btnPreviousPageGridTaskDetail;
+    var btnNextPageGridTaskDetail;
+    var btnLastPageGridTaskDetail;
+    var btnCurrentPageGridTaskDetail;
+
 
     // cbo start date calls per customer
     function createCboCallSummaryStartDate() {
@@ -200,9 +223,12 @@
             mask: '99-99-9999',
             max: new Date(cboTaskDetailEndDateDefaultValue),
             onValueChanged: function () {
-                cboTaskDetailStartDateDefaultValue = this.value.toLocaleDateString();
+                var thisDate = new Date(this.value);
+                var thisDefaultDate = [thisDate.getMonth() + 1, thisDate.getDate(), thisDate.getFullYear()].join('-');
+                cboTaskDetailStartDateDefaultValue = thisDefaultDate;
                 setTimeout(function () {
                     createCboCallDetailEndDate();
+                    refreshTaskDetailFlexGrid();
                 }, 50);
             }
         });
@@ -217,9 +243,12 @@
             mask: '99-99-9999',
             min: new Date(cboTaskDetailStartDateDefaultValue),
             onValueChanged: function () {
-                cboTaskDetailEndDateDefaultValue = this.value.toLocaleDateString();
+                var thisDate = new Date(this.value);
+                var thisDefaultDate = [thisDate.getMonth() + 1, thisDate.getDate(), thisDate.getFullYear()].join('-');
+                cboTaskDetailEndDateDefaultValue = thisDefaultDate;
                 setTimeout(function () {
                     createCboCallDetailStartDate();
+                    refreshTaskDetailFlexGrid();
                 }, 50);
             }
         });
@@ -228,23 +257,45 @@
     // get task summary report data
     function getTaskSummaryReportData() {
         var taskArray = new wijmo.collections.ObservableArray();
+        $("#loadingModal").modal("show");
         $.ajax({
             url: '/api/task/listByRangedDate/' + cboTaskSummaryStartDateDefaultValue + "/" + cboTaskSummaryEndDateDefaultValue,
             cache: false,
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             success: function (taskResult) {
+                $("#loadingModal").modal("hide");
                 if (taskResult.length > 0) {
                     for (i = 0; i < taskResult.length; i++) {
+                        var newDate = new Date(taskResult[i]["TaskDate"]);
+                        var taskDate = [newDate.getMonth() + 1, newDate.getDate(), newDate.getFullYear()].join('-');
+
+                        var newDoneDate = new Date(taskResult[i]["DoneDate"]);
+                        var newDoneTime = new Date(taskResult[i]["DoneDate"]);
+
+                        var doneDate = [newDoneDate.getMonth() + 1, newDoneDate.getDate(), newDoneDate.getFullYear()].join('-');
+                        
                         taskArray.push({
                             Id: taskResult[i]["Id"],
                             TaskNo: taskResult[i]["TaskNo"],
-                            TaskDate: taskResult[i]["TaskDate"],
+                            TaskDate: taskDate,
                             CompanyName: taskResult[i]["CompanyName"],
                             Status: taskResult[i]["Status"],
+                            Caller: taskResult[i]["Caller"],
+                            AnsweredBy: taskResult[i]["AnsweredBy"],
+                            AnsweredByString: taskResult[i]["AnsweredByString"],
                             ProductId: taskResult[i]["ProductId"],
                             ProductCode: taskResult[i]["ProductCode"],
-                            ProblemType: taskResult[i]["ProblemType"]
+                            ProblemType: taskResult[i]["ProblemType"],
+                            Product: taskResult[i]["Product"],
+                            Concern: taskResult[i]["Concern"],
+                            Staff: taskResult[i]["Staff"],
+                            Remarks: taskResult[i]["Remarks"],
+                            Severity: taskResult[i]["Severity"],
+                            Solution: taskResult[i]["Solution"],
+                            DoneDate: doneDate,
+                            DoneTime: taskResult[i]["DoneTime"],
+                            VerifiedBy: taskResult[i]["VerifiedBy"]
                         });
                     }
                 }
@@ -300,23 +351,38 @@
                         {
                             "header": "Task No",
                             "binding": "TaskNo",
-                            "width": "2*"
+                            "width": "1.7*"
                         },
                         {
                             "header": "Task Date",
                             "binding": "TaskDate",
+                            "width": "1.2*"
+                        },
+                        {
+                            "header": "Customer",
+                            "binding": "CompanyName",
                             "width": "2*"
                         },
                         {
-                            "header": "Client",
-                            "binding": "CompanyName",
-                            "width": "2*"
+                            "header": "Problem",
+                            "binding": "Concern",
+                            "width": "3*"
                         },
                         {
                             "header": "Problem Type",
                             "binding": "ProblemType",
                             "width": "2*"
                         },
+                        {
+                            "header": "Assigned to",
+                            "binding": "Staff",
+                            "width": "2*"
+                        },
+                        {
+                            "header": "Status",
+                            "binding": "Status",
+                            "width": "2*"
+                        }
             ],
             autoGenerateColumns: false,
             itemsSource: taskSummaryCollectionView,
@@ -376,23 +442,423 @@
         refreshTaskSummaryFlexGrid();
     });
 
-    // get task summary report data
+    // btn csv
+    function btnTaskSummaryReportCSVOnclick() {
+        var taskSummaryReportArray = [];
+        var fileName = 'Task_Summary_Report.CSV';
+        var headerArray = [];
+        var headers = '';
+
+        // CSV Data
+        for (i = 0; i < taskSummaryCollectionView.items.length; i++) {
+
+            taskSummaryReportArray.push({
+                TaskNo: taskSummaryCollectionView.items[i].TaskNo,
+                TaskDate: taskSummaryCollectionView.items[i].TaskDate,
+                Client: taskSummaryCollectionView.items[i].CompanyName,
+                Caller: taskSummaryCollectionView.items[i].Caller,
+                Concern: taskSummaryCollectionView.items[i].Concern,
+                AnsweredByString: taskSummaryCollectionView.items[i].AnsweredByString,
+                Staff: taskSummaryCollectionView.items[i].Staff,
+                Product: taskSummaryCollectionView.items[i].Product,
+                Remarks: taskSummaryCollectionView.items[i].Remarks,
+                Status: taskSummaryCollectionView.items[i].Status,
+                ProblemType: taskSummaryCollectionView.items[i].ProblemType,
+                Severity: taskSummaryCollectionView.items[i].Severity,
+                Solution: taskSummaryCollectionView.items[i].Solution,
+                DoneDateTime: taskSummaryCollectionView.items[i].DoneDate,
+            });
+        }
+
+        // Row headers
+        headerArray.push({
+            TaskNo: "Task No",
+            TaskDate: "Task Date",
+            Client: "Customer",
+            Caller: "Caller",
+            Concern: "Concern",
+            AnsweredBy: "Answered By",
+            Staff: "Staff",
+            Product: "Product",
+            Remarks: "Remarks",
+            Status: "Status",
+            ProblemType: "Problem Type",
+            Severity: "Severity",
+            Solution: "Solution",
+            DoneDateTime: "Done Date",
+        });
+
+        for (var h in headerArray[0]) {
+            headers += '"' + headerArray[0][h] + '",';
+        }
+
+        var CSV = '';
+        CSV = headers + '\r\n';
+        for (var i = 0; i < taskSummaryReportArray.length; i++) {
+            var row = '';
+            for (var t in taskSummaryReportArray[i]) {
+                row += '"' + taskSummaryReportArray[i][t] + '",';
+            }
+            row.slice(0, row.length - 1);
+            CSV += row + '\r\n';
+        }
+
+        // CSV Download
+        if (CSV == '') {
+            toastr.error("No data.");
+        } else {
+            var link = document.createElement("a");
+
+            if (link.download !== undefined) {
+                var blob = new Blob([CSV], { type: 'text/csv;charset=utf-8;' });
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", fileName);
+                link.style = "visibility:hidden";
+            }
+
+            if (navigator.msSaveBlob) {
+                link.addEventListener("click", function (event) {
+                    var blob = new Blob([CSV], {
+                        "type": "text/csv;charset=utf-8;"
+                    });
+                    navigator.msSaveBlob(blob, fileName);
+                }, false);
+            }
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            toastr.success("Dowload Successful");
+        }
+    }
+
+    // get task detail report data
     function getTaskDetailReportData() {
+        var taskArray = new wijmo.collections.ObservableArray();
+        $("#loadingModal").modal("show");
+        $.ajax({
+            url: '/api/tasksub/listByDateRanged/' + cboTaskDetailStartDateDefaultValue + "/" + cboTaskDetailEndDateDefaultValue,
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (taskResult) {
+                $("#loadingModal").modal("hide");
+                if (taskResult.length > 0) {
+                    for (i = 0; i < taskResult.length; i++) {
+                        var newDate = new Date(taskResult[i]["TaskDate"]);
+                        var taskDate = [newDate.getMonth() + 1, newDate.getDate(), newDate.getFullYear()].join('-');
 
+                        var newDoneDate = new Date(taskResult[i]["DoneDate"]);
+                        var doneDate = [newDoneDate.getMonth() + 1, newDoneDate.getDate(), newDoneDate.getFullYear()].join('-');
+
+                        var newFinishedDate = new Date(taskResult[i]["DoneDate"]);
+                        var fnishedDate = [newFinishedDate.getMonth() + 1, newFinishedDate.getDate(), newFinishedDate.getFullYear()].join('-');
+
+                        var newDateCalled = new Date(taskResult[i]["DoneDate"]);
+                        var dateCalled = [newDateCalled.getMonth() + 1, newDateCalled.getDate(), newDateCalled.getFullYear()].join('-');
+
+                        taskArray.push({
+                            Id: taskResult[i]["Id"],
+                            DateCalled: dateCalled,
+                            Action: taskResult[i]["Action"],
+                            TimeCalled: taskResult[i]["TimeCalled"],
+                            FinishedDate: fnishedDate,
+                            FinishedTime: taskResult[i]["FinishedTime"],
+                            Remarks: taskResult[i]["Remarks"],
+                            TaskNo: taskResult[i]["TaskNo"],
+                            TaskDate: taskDate,
+                            CompanyName: taskResult[i]["CompanyName"],
+                            Status: taskResult[i]["Status"],
+                            Caller: taskResult[i]["Caller"],
+                            AnsweredBy: taskResult[i]["AnsweredBy"],
+                            AnsweredByString: taskResult[i]["AnsweredByString"],
+                            ProductId: taskResult[i]["ProductId"],
+                            ProductCode: taskResult[i]["ProductCode"],
+                            ProblemType: taskResult[i]["ProblemType"],
+                            Product: taskResult[i]["Product"],
+                            Concern: taskResult[i]["Concern"],
+                            Staff: taskResult[i]["Staff"],
+                            TaskRemarks: taskResult[i]["Remarks"],
+                            Severity: taskResult[i]["Severity"],
+                            Solution: taskResult[i]["Solution"],
+                            DoneDate: doneDate,
+                            DoneTime: taskResult[i]["DoneTime"],
+                            VerifiedBy: taskResult[i]["VerifiedBy"]
+                        });
+                    }
+                }
+            }
+        });
+
+        return taskArray;
     }
 
-    // create task summary report flex grid
+    // navigation button for procedure detail flexgrid
+    function updateNavigateButtonsForTaskDetailFlexGrid() {
+        if (taskDetailCollectionView.pageSize <= 0) {
+            document.getElementById('navigationPageGridTaskDetail').style.display = 'none';
+            return;
+        }
+        document.getElementById('navigationPageGridTaskDetail').style.display = 'block';
+        if (taskDetailCollectionView.pageIndex === 0) {
+            btnFirstPageGridTaskDetail.setAttribute('disabled', 'disabled');
+            btnPreviousPageGridTaskDetail.setAttribute('disabled', 'disabled');
+            btnNextPageGridTaskDetail.removeAttribute('disabled');
+            btnLastPageGridTaskDetail.removeAttribute('disabled');
+        } else if (taskDetailCollectionView.pageIndex === (taskDetailCollectionView.pageCount - 1)) {
+            btnFirstPageGridTaskDetail.removeAttribute('disabled');
+            btnPreviousPageGridTaskDetail.removeAttribute('disabled');
+            btnLastPageGridTaskDetail.setAttribute('disabled', 'disabled');
+            btnNextPageGridTaskDetail.setAttribute('disabled', 'disabled');
+        } else {
+            btnFirstPageGridTaskDetail.removeAttribute('disabled');
+            btnPreviousPageGridTaskDetail.removeAttribute('disabled');
+            btnNextPageGridTaskDetail.removeAttribute('disabled');
+            btnLastPageGridTaskDetail.removeAttribute('disabled');
+        }
+        btnCurrentPageGridTaskDetail.innerHTML = (taskDetailCollectionView.pageIndex + 1) + ' / ' + taskDetailCollectionView.pageCount;
+    }
+
+    // create task detail report flex grid
     function createTaskDetailReportFlexGrid() {
-
-    }
-
-    // on load page
-    window.onload = function () {
         cboTaskDetailStartDate = new wijmo.input.InputDate('#cboTaskDetailStartDate');
         createCboCallDetailStartDate();
         cboTaskDetailEndDate = new wijmo.input.InputDate('#cboTaskDetailEndDate');
         createCboCallDetailEndDate();
 
+        taskDetailCollectionView = new wijmo.collections.CollectionView(getTaskDetailReportData());
+        taskDetailCollectionView.pageSize = 15;
+
+        taskDetailCollectionView.collectionChanged.addHandler(function (sender, args) {
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+
+        taskDetailFlexGrid = new wijmo.grid.FlexGrid('#taskDetailFlexGrid');
+        taskDetailFlexGrid.initialize({
+            columns: [
+                        {
+                            "header": "Task No",
+                            "binding": "TaskNo",
+                            "width": 130,
+                        },
+                        {
+                            "header": "Task Date",
+                            "binding": "TaskDate",
+                            "width": 130,
+                        },
+                        {
+                            "header": "Customer",
+                            "binding": "CompanyName",
+                            "width": 180,
+                        },
+                        {
+                            "header": "Problem",
+                            "binding": "Concern",
+                            "width": 250,
+                        },
+                        {
+                            "header": "Problem Type",
+                            "binding": "ProblemType",
+                            "width": 200
+                        },
+                        {
+                            "header": "Assigned to",
+                            "binding": "Staff",
+                            "width": 150,
+                        },
+                        {
+                            "header": "Status",
+                            "binding": "Status",
+                            "width": 200
+                        },
+                        {
+                            "header": "Date Called",
+                            "binding": "DateCalled",
+                            "width": 130
+                        },
+                        {
+                            "header": "Action",
+                            "binding": "Action",
+                            "width": 300
+                        },
+                        {
+                            "header": "Finished Date",
+                            "binding": "FinishedDate",
+                            "width": 130
+                        },
+                        {
+                            "header": "Remarks",
+                            "binding": "Remarks",
+                            "width": 300
+                        },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: taskDetailCollectionView,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row
+        });
+
+        taskDetailFlexGrid.trackChanges = true;
+
+        //Navigation button
+        btnFirstPageGridTaskDetail = document.getElementById('btnMoveToFirstPageGridTaskDetail');
+        btnPreviousPageGridTaskDetail = document.getElementById('btnMoveToPreviousPageGridTaskDetail');
+        btnNextPageGridTaskDetail = document.getElementById('btnMoveToNextPageGridTaskDetail');
+        btnLastPageGridTaskDetail = document.getElementById('btnMoveToLastPageGridTaskDetail');
+        btnCurrentPageGridTaskDetail = document.getElementById('btnCurrentPageGridTaskDetail');
+
+        updateNavigateButtonsForTaskDetailFlexGrid();
+
+        btnFirstPageGridTaskDetail.addEventListener('click', function () {
+            taskDetailCollectionView.moveToFirstPage();
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+        btnPreviousPageGridTaskDetail.addEventListener('click', function () {
+            taskDetailCollectionView.moveToPreviousPage();
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+        btnNextPageGridTaskDetail.addEventListener('click', function () {
+            taskDetailCollectionView.moveToNextPage();
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+        btnLastPageGridTaskDetail.addEventListener('click', function () {
+            taskDetailCollectionView.moveToLastPage();
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+    }
+
+    // refresh task detail flexgrid
+    function refreshTaskDetailFlexGrid() {
+        taskDetailCollectionView = new wijmo.collections.CollectionView(getTaskDetailReportData());
+        taskDetailCollectionView.pageSize = 15;
+
+        taskDetailCollectionView.collectionChanged.addHandler(function (sender, args) {
+            updateNavigateButtonsForTaskDetailFlexGrid();
+        });
+
+        taskDetailFlexGrid.itemsSource = taskDetailCollectionView;
+        taskDetailFlexGrid.trackChanges = true;
+    }
+
+    // task detail tab
+    $("#taskDetailTabId").click(function () {
+        $("#taskDetail").show();
+        $("#taskSummary").hide();
+
+        createTaskDetailReportFlexGrid();
+        window.createTaskDetailReportFlexGrid = function () {
+            return true;
+        }
+
+        refreshTaskDetailFlexGrid();
+    });
+
+    // btn csv
+    function btnTaskDetailReportCSVOnclick() {
+        var taskDetailReportArray = [];
+        var fileName = 'Task_Detail_Report.CSV';
+        var headerArray = [];
+        var headers = '';
+
+        // CSV Data
+        for (i = 0; i < taskDetailCollectionView.items.length; i++) {
+
+            taskDetailReportArray.push({
+                TaskNo: taskDetailCollectionView.items[i].TaskNo,
+                TaskDate: taskDetailCollectionView.items[i].TaskDate,
+                Client: taskDetailCollectionView.items[i].CompanyName,
+                Caller: taskDetailCollectionView.items[i].Caller,
+                Concern: taskDetailCollectionView.items[i].Concern,
+                AnsweredByString: taskDetailCollectionView.items[i].AnsweredByString,
+                Staff: taskDetailCollectionView.items[i].Staff,
+                Product: taskDetailCollectionView.items[i].Product,
+                Remarks: taskDetailCollectionView.items[i].Remarks,
+                Status: taskDetailCollectionView.items[i].Status,
+                ProblemType: taskDetailCollectionView.items[i].ProblemType,
+                Severity: taskDetailCollectionView.items[i].Severity,
+                Solution: taskDetailCollectionView.items[i].Solution,
+                DoneDateTime: taskDetailCollectionView.items[i].DoneDate,
+                DateCalled: taskDetailCollectionView.items[i].DateCalled,
+                Action: taskDetailCollectionView.items[i].Action,
+                FinishedDate: taskDetailCollectionView.items[i].FinishedDate,
+                Remarks: taskDetailCollectionView.items[i].Remarks,
+            });
+        }
+
+        // Row headers
+        headerArray.push({
+            TaskNo: "Task No",
+            TaskDate: "Task Date",
+            Client: "Customer",
+            Caller: "Caller",
+            Concern: "Concern",
+            AnsweredBy: "Answered By",
+            Staff: "Staff",
+            Product: "Product",
+            Remarks: "Remarks",
+            Status: "Status",
+            ProblemType: "Problem Type",
+            Severity: "Severity",
+            Solution: "Solution",
+            DoneDateTime: "Done Date",
+            DateCalled: "Date Called",
+            Action: "Action",
+            FinishedDate: "Finished Date",
+            Remarks: "Remarks"
+        });
+
+        for (var h in headerArray[0]) {
+            headers += '"' + headerArray[0][h] + '",';
+        }
+
+        var CSV = '';
+        CSV = headers + '\r\n';
+        for (var i = 0; i < taskDetailReportArray.length; i++) {
+            var row = '';
+            for (var t in taskDetailReportArray[i]) {
+                row += '"' + taskDetailReportArray[i][t] + '",';
+            }
+            row.slice(0, row.length - 1);
+            CSV += row + '\r\n';
+        }
+
+        // CSV Download
+        if (CSV == '') {
+            toastr.error("No data.");
+        } else {
+            var link = document.createElement("a");
+
+            if (link.download !== undefined) {
+                var blob = new Blob([CSV], { type: 'text/csv;charset=utf-8;' });
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", fileName);
+                link.style = "visibility:hidden";
+            }
+
+            if (navigator.msSaveBlob) {
+                link.addEventListener("click", function (event) {
+                    var blob = new Blob([CSV], {
+                        "type": "text/csv;charset=utf-8;"
+                    });
+                    navigator.msSaveBlob(blob, fileName);
+                }, false);
+            }
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            toastr.success("Dowload Successful");
+        }
+    }
+
+    // on load page
+    window.onload = function () {
         createTaskSummaryReportFlexGrid();
     }
 </script>

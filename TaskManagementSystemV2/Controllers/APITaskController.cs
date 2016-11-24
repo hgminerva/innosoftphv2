@@ -260,18 +260,21 @@ namespace TaskManagementSystemV2.Controllers
                            Caller = d.Caller,
                            Concern = d.Concern,
                            AnsweredBy = d.AnsweredBy,
+                           AnsweredByString = (from a in db.mstStaffs where a.Id == d.AnsweredBy select a).FirstOrDefault().StaffName,
                            StaffId = d.StaffId,
+                           Staff = (from s in db.mstStaffs where s.Id == d.StaffId select s).FirstOrDefault().StaffName,
                            ProductId = d.ProductId,
                            ProductCode = d.mstProduct.ProductCode,
+                           Product = d.mstProduct.ProductDescription,
                            Remarks = d.Remarks,
                            Status = d.Status,
                            ProblemType = d.ProblemType,
                            Severity = d.Severity,
                            Solution = d.Solution,
-                           DoneDate = d.DoneDate.ToString(),
-                           DoneTime = d.DoneTime.ToString(),
+                           DoneDate = Convert.ToDateTime(d.DoneDate).ToShortDateString(),
+                           DoneTime = Convert.ToDateTime(d.DoneTime).ToShortDateString(),
                            VerifiedBy = d.VerifiedBy,
-                           IsLocked = d.IsLocked
+                           IsLocked = d.IsLocked,
                        };
 
             return task.ToList();
