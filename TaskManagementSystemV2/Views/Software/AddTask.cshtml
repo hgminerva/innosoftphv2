@@ -20,197 +20,191 @@
         </ol>
     </section>
 
-    <div class="btn-group-horizontal btn-sm pull-right">
-        <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
-        <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Cancel</a>
-    </div>
-    <br />
-    <br />
-    <div class="row">
-        <form class="form-horizontal" id="add-form">
+    <div class="panel panel-default">
+        <div class="panel-heading">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="barCode" class="col-sm-3 control-label">Task Date</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control requiredField" id="theInputDate">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="barCode" class="col-sm-3 control-label">Task No</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control requiredField" id="taskNoDiv" disabled>
-                        </div>
-                    </div>
-                    <!--Client-->
-                    <div class="form-group">
-                        <label for="" class="col-sm-3 control-label">Client</label>
-                        <div class="col-sm-5">
-                            <div id="clientDiv"></div>
-                        </div>
-                    </div>
-                    <!--Product-->
-                    <div class="form-group">
-                        <label for="" class="col-sm-3 control-label">Product</label>
-                        <div class="col-sm-5">
-                            <div style="width:330px;" id="productDiv"></div>
-                        </div>
-                    </div>
-                    <!--Caller-->
-                    <div class="form-group">
-                        <label for="barCode" class="col-sm-3 control-label">Caller</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control requiredField" id="callerDiv">
-                        </div>
-                    </div>
-                    <!--Concern-->
-                    <div class="form-group">
-                        <label for="barCode" class="col-sm-3 control-label">Concern</label>
-                        <div class="col-sm-6">
-                            <textarea type="" class="form-control requiredField" id="concernDiv"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <!--Answered by Staff-->
-                    <div class="form-group">
-                        <label for="" class="col-sm-3 control-label">Answered By</label>
-                        <div class="col-sm-5">
-                            <div id="cboStaffNameDiv"></div>
-                        </div>
-                    </div>
-                    <!--Staff Assigned-->
-                    <div class="form-group">
-                        <label for="" class="col-sm-3 control-label">Staff Assigned</label>
-                        <div class="col-sm-5">
-                            <div id="cboStaffAssignedDiv"></div>
-                        </div>
-                    </div>
-                    <!--Remarks-->
-                    <div class="form-group">
-                        <label for="barCode" class="col-sm-3 control-label">Remarks</label>
-                        <div class="col-sm-6">
-                            <textarea type="" class="form-control requiredField" id="remarksDiv"></textarea>
-                        </div>
-                    </div>
-                    <!--Problem Type-->
-                    <div class="form-group">
-                        <label for="designation" class="col-sm-3 control-label">Problem Type</label>
-                        <div class="col-sm-6">
-                            <div style="width:290px;" id="problemTypeDiv"></div>
-                        </div>
-                    </div>
-                    <!--Severity-->
-                    <div class="form-group">
-                        <label for="designation" class="col-sm-3 control-label">Severity</label>
-                        <div class="col-sm-6">
-                            <div style="width:250px;" id="severityDiv"></div>
-                        </div>
-                    </div>
-                    <!--Status-->
-                    <div class="form-group">
-                        <label for="designation" class="col-sm-3 control-label">Status</label>
-                        <div class="col-sm-6">
-                            <div id="statusDiv"></div>
-                        </div>
-                    </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" align="right">
+                    <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
+                    <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Cancel</a>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="add-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Task Date</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control requiredField" id="theInputDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Task No</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control requiredField" id="taskNoDiv" disabled>
+                            </div>
+                        </div>
+                        <!--Client-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Client</label>
+                            <div class="col-sm-5">
+                                <div id="clientDiv"></div>
+                            </div>
+                        </div>
+                        <!--Product-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Product</label>
+                            <div class="col-sm-5">
+                                <div style="width:330px;" id="productDiv"></div>
+                            </div>
+                        </div>
+                        <!--Caller-->
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Caller</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control requiredField" id="callerDiv">
+                            </div>
+                        </div>
+                        <!--Concern-->
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Concern</label>
+                            <div class="col-sm-6">
+                                <textarea type="" class="form-control requiredField" id="concernDiv"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!--Answered by Staff-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Answered By</label>
+                            <div class="col-sm-5">
+                                <div id="cboStaffNameDiv"></div>
+                            </div>
+                        </div>
+                        <!--Staff Assigned-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Staff Assigned</label>
+                            <div class="col-sm-5">
+                                <div id="cboStaffAssignedDiv"></div>
+                            </div>
+                        </div>
+                        <!--Remarks-->
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-3 control-label">Remarks</label>
+                            <div class="col-sm-6">
+                                <textarea type="" class="form-control requiredField" id="remarksDiv"></textarea>
+                            </div>
+                        </div>
+                        <!--Problem Type-->
+                        <div class="form-group">
+                            <label for="designation" class="col-sm-3 control-label">Problem Type</label>
+                            <div class="col-sm-6">
+                                <div style="width:290px;" id="problemTypeDiv"></div>
+                            </div>
+                        </div>
+                        <!--Severity-->
+                        <div class="form-group">
+                            <label for="designation" class="col-sm-3 control-label">Severity</label>
+                            <div class="col-sm-6">
+                                <div style="width:250px;" id="severityDiv"></div>
+                            </div>
+                        </div>
+                        <!--Status-->
+                        <div class="form-group">
+                            <label for="designation" class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-6">
+                                <div id="statusDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="container">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Action</a></li>
-            <li><a data-toggle="tab" href="#menu1">Solution</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <form class="form-horizontal" id="add-form">
-                    <div class="tabstyle">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="barCode" class="col-sm-2 control-label">Action</label>
-                                <div class="col-sm-9">
-                                    <textarea type="" class="form-control" id="actionDiv"></textarea>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
-                                <div class="col-sm-4">
-                                    <div id="dateCalledDiv"></div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="" class="col-sm-2 control-label">Time Called</label>
-                                <div class="col-sm-4">
-                                    <div id="timeCalledDiv"></div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="" class="col-sm-2 control-label">Finished Date</label>
-                                <div class="col-sm-6">
-                                    <div id="finishedDateDiv"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-sm-2 control-label">Finished Time</label>
-                                <div class="col-sm-6">
-                                    <div id="finishedTimeDiv"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="barCode" class="col-sm-2 control-label">Remarks</label>
-                                <div class="col-sm-9">
-                                    <textarea type="" class="form-control" id="remarksDiv"></textarea>
-                                </div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Action</a></li>
+        <li><a data-toggle="tab" href="#menu1">Solution</a></li>
+    </ul>
+    <br />
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" id="add-form">
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-2 control-label">Action</label>
+                            <div class="col-sm-9">
+                                <textarea type="" class="form-control" id="actionDiv"></textarea>
                             </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
+                            <div class="col-sm-4">
+                                <div id="dateCalledDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Time Called</label>
+                            <div class="col-sm-4">
+                                <div id="timeCalledDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Finished Date</label>
+                            <div class="col-sm-6">
+                                <div id="finishedDateDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Finished Time</label>
+                            <div class="col-sm-6">
+                                <div id="finishedTimeDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-2 control-label">Remarks</label>
+                            <div class="col-sm-9">
+                                <textarea type="" class="form-control" id="remarksDiv"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div id="menu1" class="tab-pane fade">
-                <form class="form-horizontal" id="add-form">
-                    <div class="tabstyle">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="barCode" class="col-sm-2 control-label">Solution</label>
-                                    <div class="col-sm-9">
-                                        <textarea type="" class="form-control" id="solutionDiv"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="doneDateDiv" class="col-sm-2 control-label">Done Date</label>
-                                    <div class="col-sm-6">
-                                        <div id="doneDateDiv"></div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
-                                    <div class="col-sm-6">
-                                        <div id="doneTimeDiv"></div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="doneDateDiv" class="col-sm-2 control-label">Verified by</label>
-                                    <div class="col-sm-6">
-                                        <div id="verifiedDiv"></div>
-                                    </div>
-                                </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" id="add-form">
+                        <div class="form-group">
+                            <label for="barCode" class="col-sm-2 control-label">Solution</label>
+                            <div class="col-sm-9">
+                                <textarea type="" class="form-control" id="solutionDiv"></textarea>
                             </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="doneDateDiv" class="col-sm-2 control-label">Done Date</label>
+                            <div class="col-sm-6">
+                                <div id="doneDateDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
+                            <div class="col-sm-6">
+                                <div id="doneTimeDiv"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="doneDateDiv" class="col-sm-2 control-label">Verified by</label>
+                            <div class="col-sm-6">
+                                <div id="verifiedDiv"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

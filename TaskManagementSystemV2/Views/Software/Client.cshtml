@@ -21,51 +21,49 @@
             </ol>
         </section>
         <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!--table container-->
-                    <div class="box">
+            <!--table container-->
+            <div class="box">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <div class="row">
-                            <div class="box-header">
-                                <div class="col-md-6">
-                                    <!--search box-->
-                                    <div class="box-tools">
-                                        <div class="input-group" style="width: 150px;">
-                                            <input type="text" class="form
-                                               -control input-sm" id="InputFilter" placeholder="Search">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="btn-group-horizontal btn-sm pull-right">
-                                    <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
-                                    <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="form-control" id="InputFilter" placeholder="Search">
                                 </div>
                             </div>
+                            <div class="col-md-6" align="right">
+                                <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
+                                <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                            </div>
                         </div>
-                        <!--table-->
-                        <table id="clientCollectionGrid" class="grid border-custom"></table>
+                    </div>
+                    <div class="panel-body">
+                        <div id="clientCollectionGrid" class="grid border-custom"></div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="btn-group col-md-7" id="navigationPageGrid">
+                                <button type="button" class="btn btn-default border-custom" id="btnMoveToFirstPageGrid">
+                                    <span class="glyphicon glyphicon-fast-backward"></span>
+                                </button>
+                                <button type="button" class="btn btn-default border-custom" id="btnMoveToPreviousPageGrid">
+                                    <span class="glyphicon glyphicon-step-backward"></span>
+                                </button>
+                                <button type="button" class="btn btn-default border-custom" disabled style="width: 100px" id="btnCurrentPageGrid"></button>
+                                <button type="button" class="btn btn-default border-custom" id="btnMoveToNextPageGrid">
+                                    <span class="glyphicon glyphicon-step-forward"></span>
+                                </button>
+                                <button type="button" class="btn btn-default border-custom" id="btnMoveToLastPageGrid">
+                                    <span class="glyphicon glyphicon-fast-forward"></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <!--navigation buttons-->
-            <div class="btn-group pull-right" id="navigationPageGrid">
-                <button type="button" class="btn btn-default border-custom" id="btnMoveToFirstPageGrid">
-                    <span class="glyphicon glyphicon-fast-backward"></span>
-                </button>
-                <button type="button" class="btn btn-default border-custom" id="btnMoveToPreviousPageGrid">
-                    <span class="glyphicon glyphicon-step-backward"></span>
-                </button>
-                <button type="button" class="btn btn-default border-custom" disabled style="width: 100px" id="btnCurrentPageGrid"></button>
-                <button type="button" class="btn btn-default border-custom" id="btnMoveToNextPageGrid">
-                    <span class="glyphicon glyphicon-step-forward"></span>
-                </button>
-                <button type="button" class="btn btn-default border-custom" id="btnMoveToLastPageGrid">
-                    <span class="glyphicon glyphicon-fast-forward"></span>
-                </button>
-            </div>
+
         </section>
     </div><!--Wrapper end-->
     <!-- Company Delete -->
@@ -396,8 +394,6 @@
             });
         }
 
-
-
         //============
         // On Page Load
         // ============
@@ -434,51 +430,50 @@
             clientGrid = new wijmo.grid.FlexGrid('#clientCollectionGrid');
             clientGrid.initialize({
                 columns: [
+                            {
+                                "header": "Edit",
+                                "binding": "EditId",
+                                "width": 70,
+                                "align": "center",
+                                "isContentHtml": true
+                            },
+                            {
+                                "header": "Delete",
+                                "binding": "DeleteId",
+                                "width": 90,
+                                "align": "center",
+                                "isContentHtml": true
 
-
-                {
-                    "header": "Edit",
-                    "binding": "EditId",
-                    "width": 70,
-                    "align": "center",
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Delete",
-                    "binding": "DeleteId",
-                    "width": 90,
-                    "align": "center",
-                    "isContentHtml": true
-
-                },
-                {
-                    "header": "Company Name",
-                    "binding": "CompanyName",
-                    "align": "center",
-                    "allowSorting": true,
-                    "width": "5*"
-                },
-                {
-                    "header": "Company Address",
-                    "binding": "CompanyAddress",
-                    "align": "center",
-                    "allowSorting": true,
-                    "width": "5*"
-                },
-                {
-                    "header": "Contact Number",
-                    "binding": "ContactNumber",
-                    "align": "center",
-                    "allowSorting": true,
-                    "width": "3*"
-                },
-                {
-                    "header": "L",
-                    "binding": "IsLocked",
-                    "align": "center",
-                    "allowSorting": true,
-                    "width": ".5*"
-                }],
+                            },
+                            {
+                                "header": "Company Name",
+                                "binding": "CompanyName",
+                                "align": "left",
+                                "allowSorting": true,
+                                "width": "5*"
+                            },
+                            {
+                                "header": "Company Address",
+                                "binding": "CompanyAddress",
+                                "align": "left",
+                                "allowSorting": true,
+                                "width": "5*"
+                            },
+                            {
+                                "header": "Contact Number",
+                                "binding": "ContactNumber",
+                                "align": "left",
+                                "allowSorting": true,
+                                "width": "3*"
+                            },
+                            {
+                                "header": "L",
+                                "binding": "IsLocked",
+                                "align": "center",
+                                "allowSorting": true,
+                                "width": ".5*"
+                            }
+                ],
                 autoGenerateColumns: false,
                 itemsSource: clientList,
                 isReadOnly: true,

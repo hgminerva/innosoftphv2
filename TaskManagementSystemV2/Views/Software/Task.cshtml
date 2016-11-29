@@ -52,19 +52,27 @@
             </div>
         </div>
 
-        <form>
-            <div id="theInputDate"></div>
-            <wj-input-date value="theDate" min="2014-8-1" format="M/d/yyyy">
-        </form>
-        <div class="btn-group-horizontal btn-sm pull-right">
-            <a href="@Url.Action("AddTask","Software")" class="btn btn-info"><i class="fa fa-plus"></i> Add</a>
-            <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <div id="theInputDate"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" align="right">
+                        <a href="@Url.Action("AddTask","Software")" class="btn btn-info"><i class="fa fa-plus"></i> Add</a>
+                        <a href="~/Software/Dashboard" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="userCollectionGrid"></div>
+            </div>
         </div>
 
-        <div id="userCollectionGrid"></div>
-
     </div>
-
 </div>
 
 @Scripts.Render("~/bundles/jquery")
@@ -304,35 +312,35 @@
                 "header": "Task No.",
                 "binding": "TaskNo",
                 "width": 70,
-                "align": "center",
+                "align": "left",
                 "isContentHtml": true,
                 "width": "2*"
             },
             {
                 "header": "Client",
                 "binding": "CompanyName",
-                "align": "center",
+                "align": "left",
                 "allowSorting": true,
                 "width": "3*"
             },
             {
                 "header": "System",
                 "binding": "ProductCode",
-                "align": "center",
+                "align": "left",
                 "allowSorting": true,
                 "width": "1.5*"
             },
             {
                 "header": "Problem Type",
                 "binding": "ProblemType",
-                "align": "center",
+                "align": "left",
                 "allowSorting": true,
                 "width": "3*"
             },
             {
                 "header": "Status",
                 "binding": "Status",
-                "align": "center",
+                "align": "left",
                 "allowSorting": true,
                 "width": "1.5*"
             }],
