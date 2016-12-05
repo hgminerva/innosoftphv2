@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-6" align="right">
-                    <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
+                    <button class="btn btn-info" id="saveButton" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
                     <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Cancel</a>
                 </div>
             </div>
@@ -602,6 +602,7 @@
     // Add Task
     // ============
     function cmdAddTask() {
+        
         var taskObject = new Object();
         var taskSubObject = new Object();
 
@@ -628,6 +629,7 @@
         if (taskEntryValidation() == false) {
             toastr.error("Fill out form");
         } else {
+            $("#saveButton").prop('disabled', true);
             $.ajax({
                 url: '/api/task/add/',
                 type: 'POST',
