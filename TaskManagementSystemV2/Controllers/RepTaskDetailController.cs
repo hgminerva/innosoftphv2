@@ -41,10 +41,9 @@ namespace TaskManagementSystemV2.Controllers
             // Fonts Customization
             Font fontArial18Bold = FontFactory.GetFont("Arial", 18, Font.BOLD);
             Font fontArial17Bold = FontFactory.GetFont("Arial", 17, Font.BOLD);
-            Font fontArial15Bold = FontFactory.GetFont("Arial", 15, Font.BOLD, BaseColor.WHITE);
+            Font fontArial15Bold = FontFactory.GetFont("Arial", 15, Font.BOLD);
             Font fontArial12Bold = FontFactory.GetFont("Arial", 12, Font.BOLD);
             Font fontArial12 = FontFactory.GetFont("Arial", 12);
-            var headerColor = new BaseColor(17, 37, 64);
 
             // line
             Paragraph line = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
@@ -71,7 +70,7 @@ namespace TaskManagementSystemV2.Controllers
             float[] callTicketTitleWithCells = new float[] { 100f };
             callTicketTitle.SetWidths(callTicketTitleWithCells);
             callTicketTitle.WidthPercentage = 100;
-            callTicketTitle.AddCell(new PdfPCell(new Phrase("Call Ticket", fontArial15Bold)) { HorizontalAlignment = 1, Border = 1, PaddingTop = 3f, PaddingBottom = 7f, BackgroundColor = headerColor });
+            callTicketTitle.AddCell(new PdfPCell(new Phrase("Call Ticket", fontArial15Bold)) { HorizontalAlignment = 1, Border = 1, PaddingTop = 3f, PaddingBottom = 7f });
             document.Add(callTicketTitle);
 
             // queries
@@ -128,7 +127,7 @@ namespace TaskManagementSystemV2.Controllers
             float[] actionTitleWithCells = new float[] { 100f };
             actionTitle.SetWidths(actionTitleWithCells);
             actionTitle.WidthPercentage = 100;
-            actionTitle.AddCell(new PdfPCell(new Phrase("Action", fontArial15Bold)) { HorizontalAlignment = 1, Border = 0, PaddingTop = 3f, PaddingBottom = 7f, BackgroundColor = headerColor });
+            actionTitle.AddCell(new PdfPCell(new Phrase("Action", fontArial15Bold)) { HorizontalAlignment = 1, Border = 0, PaddingTop = 3f, PaddingBottom = 7f });
             document.Add(actionTitle);
 
             document.Add(line);
